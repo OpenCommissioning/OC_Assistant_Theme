@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.5"></a>
+## [1.4.5](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.5) (2025-01-03)
+
+### Bug Fixes
+
+* calculation for MessageBox top position ([28447ca](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/28447ca39d0f492d58023e99857ba22c217b2e9c))
+
 <a name="1.4.4"></a>
 ## [1.4.4](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.4) (2025-01-03)
 
