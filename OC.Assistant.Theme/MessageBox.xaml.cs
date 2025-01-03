@@ -69,7 +69,7 @@ public partial class MessageBox
         
         _messageBox.Show();
         _messageBox.Hide();
-        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - _messageBox.Height;
+        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - _messageBox.Height / 2;
         _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - _messageBox.Width / 2;
         _messageBox.ShowDialog();
     }
