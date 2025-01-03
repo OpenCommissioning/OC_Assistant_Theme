@@ -35,7 +35,7 @@ public partial class MessageBox
         };
         SetVisibilityOfButtons(_messageBox, button);
         SetImageOfMessageBox(_messageBox, image);
-        _messageBox.ShowDialog();
+        SetPositionAndShow();
         return _result;
     }
     
@@ -58,8 +58,20 @@ public partial class MessageBox
         _messageBox.ContentGrid.Children.Add(content);
         SetVisibilityOfButtons(_messageBox, button);
         SetImageOfMessageBox(_messageBox, image);
-        _messageBox.ShowDialog();
+        SetPositionAndShow();
         return _result;
+    }
+    
+    private static void SetPositionAndShow()
+    {
+        var mainWindow = Application.Current.MainWindow;
+        if (mainWindow is null || _messageBox is null) return;
+        
+        _messageBox.Show();
+        _messageBox.Hide();
+        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - _messageBox.Height;
+        _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - _messageBox.Width / 2;
+        _messageBox.ShowDialog();
     }
 
     private static void SetVisibilityOfButtons(MessageBox messageBox, MessageBoxButton button)
