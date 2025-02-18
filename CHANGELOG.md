@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.6"></a>
+## [1.4.6](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.6) (2025-02-18)
+
+### Bug Fixes
+
+* nuget package multi targeting ([60a10be](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/60a10be7ac96e8e3f48b2bf1815d17c4e4451790))
+
 <a name="1.4.5"></a>
 ## [1.4.5](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.5) (2025-01-03)
 
