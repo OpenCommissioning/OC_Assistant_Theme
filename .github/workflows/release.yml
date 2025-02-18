@@ -45,11 +45,11 @@ jobs:
         
     - name: Dotnet build
       if: steps.versionize.outcome == 'success'
-      run: dotnet build OC.Assistant.Theme --configuration release -p:EnableWindowsTargeting=true --output ./Publish
+      run: dotnet build OC.Assistant.Theme --configuration release -p:EnableWindowsTargeting=true
             
     - name: Push to NuGet
       if: steps.versionize.outcome == 'success'
-      run: dotnet nuget push "./Publish/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "OC.Assistant.Theme/bin/release/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
 
     - name: Publish new release
       if: steps.versionize.outcome == 'success'
