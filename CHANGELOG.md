@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.7"></a>
+## [1.4.7](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.7) (2025-02-18)
+
+### Bug Fixes
+
+* setup dotnet ([8f42096](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/8f42096aa0470310801bbb3af2ffadbb9a5247f1))
+
 <a name="1.4.6"></a>
 ## [1.4.6](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.6) (2025-02-18)
 
