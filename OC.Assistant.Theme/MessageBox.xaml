@@ -10,11 +10,11 @@
         FontFamily="{DynamicResource ThemeFontFamily}"
         FontSize="{DynamicResource ThemeFontSize}"
         Background="Transparent">
-    <Border Background="{DynamicResource OverlayBrush}" 
-            BorderBrush="{DynamicResource OverlayBrush}"
+    <Border Background="{DynamicResource BackgroundOverlayBrush}" 
+            BorderBrush="{DynamicResource White5Brush}"
             CornerRadius="{DynamicResource ControlCornerRadius}"
-            BorderThickness="{DynamicResource OverlayBorderThickness}">
-        <Grid>
+            BorderThickness="1">
+        <Grid Margin="{DynamicResource OverlayBorderThickness}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27" />
                 <RowDefinition Height="*"/>
@@ -24,8 +24,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="{DynamicResource OverlayBrush}">
-                <Label HorizontalAlignment="Left" Margin="6,0,0,0" >
+            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="{DynamicResource BackgroundOverlayBrush}">
+                <Label HorizontalAlignment="Left" Margin="6,6,0,0" >
                     <TextBlock Name="TitleLabel"/>
                 </Label>
             </Grid>
