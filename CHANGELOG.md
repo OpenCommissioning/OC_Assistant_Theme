@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.8"></a>
+## [1.4.8](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.8) (2025-03-19)
+
+### Bug Fixes
+
+* coloring for MessageBox ([e23d73a](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/e23d73a0cc69f5aff1d10e13e96edad3e944b9d2))
+
 <a name="1.4.7"></a>
 ## [1.4.7](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.7) (2025-02-18)
 
