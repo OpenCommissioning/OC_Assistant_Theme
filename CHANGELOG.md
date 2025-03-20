@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.9"></a>
+## [1.4.9](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.9) (2025-03-20)
+
+### Bug Fixes
+
+* border coloring for better visibility on flyout menus ([55b0a07](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/55b0a07718522001bdead3a1eb97a06f7e3c61c4))
+
 <a name="1.4.8"></a>
 ## [1.4.8](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.8) (2025-03-19)
 
