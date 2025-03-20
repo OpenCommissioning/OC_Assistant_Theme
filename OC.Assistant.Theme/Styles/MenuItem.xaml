@@ -12,7 +12,7 @@
     </Style>
 
     <Style x:Key="DefaultMenuItemSeparatorStyle" TargetType="Separator">
-        <Setter Property="Background" Value="{DynamicResource White3Brush}" />
+        <Setter Property="Background" Value="{DynamicResource White4Brush}" />
         <Setter Property="Padding" Value="12,4,12,4" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
@@ -117,6 +117,7 @@
                             <Border
                                 x:Name="SubMenuBorder"
                                 BorderThickness="1"
+                                BorderBrush="{DynamicResource White4Brush}"
                                 CornerRadius="{DynamicResource ControlCornerRadius}" />
                         </Grid>
                     </Border>
@@ -335,6 +336,7 @@
                                 <Border
                                     x:Name="SubMenuBorder"
                                     BorderThickness="1"
+                                    BorderBrush="{DynamicResource White4Brush}"
                                     CornerRadius="{DynamicResource ControlCornerRadius}" />
                             </Grid>
                         </Border>
@@ -461,7 +463,8 @@
                                         </ScrollViewer>
                                         <Border
                                             x:Name="SubMenuBorder"
-                                            BorderThickness="0"
+                                            BorderThickness="1"
+                                            BorderBrush="{DynamicResource White4Brush}"
                                             CornerRadius="{DynamicResource ControlCornerRadius}" />
                                     </Grid>
                                 </Border>

@@ -114,7 +114,7 @@
     <internal:StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="White3Brush" />
     <internal:StaticResource x:Key="ComboBoxDropDownForeground" ResourceKey="ForegroundBaseBrush" />
     <internal:StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="OverlayBrush" />
-    <internal:StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="TransparentBrush" />
+    <internal:StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="White4Brush" />
     <internal:StaticResource x:Key="ComboBoxDropDownBackgroundPointerOver" ResourceKey="Accent3Brush" />
     <internal:StaticResource x:Key="ComboBoxDropDownBackgroundPointerPressed" ResourceKey="White4Brush" />
     <internal:StaticResource x:Key="ComboBoxFocusedDropDownBackgroundPointerOver" ResourceKey="White5Brush" />
