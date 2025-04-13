@@ -14,7 +14,7 @@
             BorderBrush="{DynamicResource White5Brush}"
             CornerRadius="{DynamicResource ControlCornerRadius}"
             BorderThickness="1">
-        <Grid Margin="{DynamicResource OverlayBorderThickness}">
+        <Grid Margin="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27" />
                 <RowDefinition Height="*"/>
@@ -59,10 +59,10 @@
             
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
-                    <Button Name="ButtonOk" Content="OK" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource ButtonBackgroundPointerOver}"/>
-                    <Button Name="ButtonYes" Content="Yes" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource ButtonBackgroundPointerOver}"/>
-                    <Button Name="ButtonNo" Content="No" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource ButtonBackgroundPointerOver}"/>
-                    <Button Name="ButtonCancel" Content="Cancel" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource ButtonBackgroundPointerOver}"/>
+                    <Button Name="ButtonOk" Content="OK" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
+                    <Button Name="ButtonYes" Content="Yes" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
+                    <Button Name="ButtonNo" Content="No" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
+                    <Button Name="ButtonCancel" Content="Cancel" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
                 </StackPanel>
             </Grid>
         </Grid>
