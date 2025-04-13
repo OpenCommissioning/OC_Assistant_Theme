@@ -65,12 +65,13 @@ public partial class MessageBox
     private static void SetPositionAndShow()
     {
         var mainWindow = Application.Current.MainWindow;
-        if (mainWindow is null || _messageBox is null) return;
+        if (mainWindow is null) return;
+        if (_messageBox?.Content is not FrameworkElement content) return;
         
-        _messageBox.Show();
-        _messageBox.Hide();
-        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - _messageBox.Height / 2;
-        _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - _messageBox.Width / 2;
+        content.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        _messageBox.WindowStartupLocation = WindowStartupLocation.Manual;
+        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - content.DesiredSize.Height / 2;
+        _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
         _messageBox.ShowDialog();
     }
 
