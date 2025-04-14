@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.10"></a>
+## [1.4.10](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.10) (2025-04-14)
+
+### Bug Fixes
+
+* optimized MessageBox startup location ([2935b26](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/2935b26f48312ea7b25a6147d8b69fe33fbccacd))
+* simplify coloring resources ([65f1719](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/65f1719d56b98f6ff28511b70f9065f1e698f95a))
+
 <a name="1.4.9"></a>
 ## [1.4.9](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.9) (2025-03-20)
 
