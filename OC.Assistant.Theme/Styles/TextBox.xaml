@@ -5,10 +5,10 @@
     
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
-        <Setter Property="Background" Value="{DynamicResource TextControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrush}" />
-        <Setter Property="SelectionBrush" Value="{DynamicResource TextControlSelectionHighlightColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
+        <Setter Property="Background" Value="{DynamicResource Dark1Brush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource White2Brush}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource AccentBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
@@ -39,13 +39,13 @@
                                     <ControlTemplate TargetType="Button">
                                         <Border
                                             x:Name="ButtonLayoutGrid"
-                                            BorderBrush="{DynamicResource TextControlButtonBorderBrush}"
+                                            BorderBrush="{DynamicResource TransparentBrush}"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Background="Transparent"
                                             CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}">
                                             <Label
                                                 x:Name="GlyphElement"
-                                                Foreground="{DynamicResource TextControlButtonForeground}"
+                                                Foreground="{DynamicResource White1Brush}"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                 FontStyle="Normal"
@@ -56,13 +56,13 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="true">
-                                                <Setter Property="Background" TargetName="ButtonLayoutGrid" Value="{DynamicResource TextControlButtonBackgroundPointerOver}" />
-                                                <Setter Property="BorderBrush" TargetName="ButtonLayoutGrid" Value="{DynamicResource TextControlButtonBorderBrushPointerOver}" />
-                                                <Setter Property="Foreground" TargetName="GlyphElement" Value="{DynamicResource TextControlButtonForegroundPointerOver}" />
+                                                <Setter Property="Background" TargetName="ButtonLayoutGrid" Value="{DynamicResource TransparentBrush}" />
+                                                <Setter Property="BorderBrush" TargetName="ButtonLayoutGrid" Value="{DynamicResource TransparentBrush}" />
+                                                <Setter Property="Foreground" TargetName="GlyphElement" Value="{DynamicResource AccentBrush}" />
                                             </Trigger>
                                             <Trigger Property="IsPressed" Value="true">
-                                                <Setter Property="BorderBrush" TargetName="ButtonLayoutGrid" Value="{DynamicResource TextControlButtonBorderBrushPressed}" />
-                                                <Setter Property="Foreground" TargetName="GlyphElement" Value="{DynamicResource TextControlButtonForegroundPressed}" />
+                                                <Setter Property="BorderBrush" TargetName="ButtonLayoutGrid" Value="{DynamicResource TransparentBrush}" />
+                                                <Setter Property="Foreground" TargetName="GlyphElement" Value="{DynamicResource WhiteBrush}" />
                                             </Trigger>
                                             <Trigger Property="IsEnabled" Value="false">
                                                 <Setter Property="Opacity" TargetName="ButtonLayoutGrid" Value="0" />
@@ -170,29 +170,29 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="internals:ControlHelper.PlaceholderForeground" Value="{x:Null}">
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForeground}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White2Brush}" />
                         </Trigger>
                         <Trigger Property="internals:TextBoxClearButton.HasText" Value="True">
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" Value="{DynamicResource TextControlBackgroundDisabled}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundDisabled}" />
+                            <Setter Property="Background" Value="{DynamicResource White5Brush}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White5Brush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White4Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}" />
-                            <Setter Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundPointerOver}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundPointerOver}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White1Brush}" />
+                            <Setter Property="Background" Value="{DynamicResource DarkBrush}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White2Brush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelectionActive" Value="true">
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundFocused}" />
-                            <Setter Property="Background" Value="{DynamicResource TextControlBackgroundFocused}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushFocused}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter Property="Background" Value="{DynamicResource BackgroundBaseBrush}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderThickness" Value="1" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundFocused}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

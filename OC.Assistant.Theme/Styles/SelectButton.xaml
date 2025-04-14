@@ -47,8 +47,8 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Background" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
-                                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+                                <Setter TargetName="Background" Property="Background" Value="{DynamicResource White5Brush}" />
+                                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         
@@ -58,8 +58,8 @@
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Background" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
-                                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
+                                <Setter TargetName="Background" Property="Background" Value="{DynamicResource White3Brush}" />
+                                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         

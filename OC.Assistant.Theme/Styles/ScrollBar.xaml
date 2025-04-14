@@ -14,13 +14,13 @@
             SnapsToDevicePixels="True" />
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillPointerOver}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource White3Brush}" />
             </Trigger>
             <Trigger Property="IsDragging" Value="True">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillPressed}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource White2Brush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillDisabled}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource TransparentBrush}" />
                 <Setter TargetName="ThumbVisual" Property="Opacity" Value="0" />
             </Trigger>
         </ControlTemplate.Triggers>
@@ -35,13 +35,13 @@
             SnapsToDevicePixels="True" />
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillPointerOver}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource White3Brush}" />
             </Trigger>
             <Trigger Property="IsDragging" Value="True">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillPressed}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource White2Brush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource ScrollBarThumbFillDisabled}" />
+                <Setter TargetName="ThumbVisual" Property="Fill" Value="{DynamicResource TransparentBrush}" />
                 <Setter TargetName="ThumbVisual" Property="Opacity" Value="0" />
             </Trigger>
         </ControlTemplate.Triggers>
@@ -53,9 +53,9 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="MinWidth" Value="{StaticResource ScrollBarSize}" />
         <Setter Property="MinHeight" Value="{StaticResource ScrollBarSize}" />
-        <Setter Property="Background" Value="{DynamicResource ScrollBarBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource ScrollBarForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollBarBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -77,7 +77,7 @@
                                 <Track.Thumb>
                                     <Thumb
                                         x:Name="VerticalThumb"
-                                        Background="{DynamicResource ScrollBarPanningThumbBackground}"
+                                        Background="{DynamicResource White4Brush}"
                                         Template="{StaticResource VerticalThumbTemplate}"
                                         Width="{StaticResource ScrollBarSize}"
                                         RenderTransformOrigin="1,0.5">
@@ -88,8 +88,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ScrollBarBackgroundDisabled}" />
-                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ScrollBarBorderBrushDisabled}" />
+                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                             <Setter TargetName="Root" Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -115,7 +115,7 @@
                                         <Track.Thumb>
                                             <Thumb
                                                 x:Name="HorizontalThumb"
-                                                Background="{DynamicResource ScrollBarPanningThumbBackground}"
+                                                Background="{DynamicResource White4Brush}"
                                                 Template="{StaticResource HorizontalThumbTemplate}"
                                                 Height="{StaticResource ScrollBarSize}"
                                                 VerticalAlignment="Bottom"
@@ -127,8 +127,8 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource ScrollBarBackgroundDisabled}" />
-                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ScrollBarBorderBrushDisabled}" />
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource TransparentBrush}" />
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                                     <Setter TargetName="Root" Property="Opacity" Value="0.5" />
                                 </Trigger>
                             </ControlTemplate.Triggers>

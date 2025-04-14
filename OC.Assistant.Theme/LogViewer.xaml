@@ -44,13 +44,13 @@
                     <TextBlock Text="{Binding Header}"
                                FontSize="12"
                                TextWrapping="Wrap"
-                               Foreground="{DynamicResource TextControlForegroundDisabled}"
+                               Foreground="{DynamicResource White3Brush}"
                                Cursor="Arrow">
                     </TextBlock>
                     <TextBlock Text="{Binding Text}"
                                FontSize="12"
                                TextWrapping="Wrap"
-                               Foreground="{DynamicResource TextControlForeground}"
+                               Foreground="{DynamicResource ForegroundBaseBrush}"
                                VerticalAlignment="Center"
                                Background="Transparent">
                     </TextBlock>

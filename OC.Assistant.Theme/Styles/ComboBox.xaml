@@ -10,8 +10,8 @@
     <Style x:Key="DefaultComboBoxItemStyle" TargetType="ComboBoxItem">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
         <Setter Property="Padding" Value="11,3,11,3" />
         <Setter Property="Margin" Value="0,1,0,1" />
@@ -42,17 +42,17 @@
                                 <Condition Property="IsSelected" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundPointerOver}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushPointerOver}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource Accent3Brush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundDisabled}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushDisabled}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundDisabled}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
                         </MultiTrigger>
                         <!-- Selected -->
                         <MultiTrigger>
@@ -60,9 +60,9 @@
                                 <Condition Property="IsSelected" Value="True" />
                                 <Condition Property="IsFocused" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelected}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelected}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelected}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource Accent2Brush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                         </MultiTrigger>
                         <!-- SelectedUnfocused -->
                         <MultiTrigger>
@@ -70,9 +70,9 @@
                                 <Condition Property="IsSelected" Value="True" />
                                 <Condition Property="IsFocused" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedUnfocused}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelectedUnfocused}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedUnfocused}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource Accent2Brush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                         </MultiTrigger>
                         <!-- SelectedDisabled -->
                         <MultiTrigger>
@@ -80,9 +80,9 @@
                                 <Condition Property="IsSelected" Value="True" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedDisabled}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelectedDisabled}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedDisabled}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
                         </MultiTrigger>
                         <!-- SelectedPointerOver -->
                         <MultiTrigger>
@@ -90,8 +90,8 @@
                                 <Condition Property="IsSelected" Value="True" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedPointerOver}" />
-                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource ComboBoxItemBorderBrushSelectedPointerOver}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource Accent1Brush}" />
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -139,7 +139,7 @@
                             IsTabStop="False" />
                         <TextBlock
                             x:Name="PlaceholderTextContentPresenter"
-                            Foreground="{DynamicResource TextControlPlaceholderForeground}"
+                            Foreground="{DynamicResource White2Brush}"
                             Margin="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             Text="{TemplateBinding internals:ControlHelper.PlaceholderText}"
@@ -150,22 +150,22 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource TextControlBackgroundDisabled}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />
-                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundDisabled}" />
+                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource White5Brush}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White5Brush}" />
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White4Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}" />
+                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource DarkBrush}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White1Brush}" />
                         </Trigger>
                         <Trigger Property="IsSelectionActive" Value="True">
-                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource TextControlBackgroundFocused}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushFocused}" />
+                            <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource BackgroundBaseBrush}" />
+                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderThickness" Value="1" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundFocused}" />
-                            <Setter Property="CaretBrush" Value="{DynamicResource TextControlForegroundFocused}" />
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource TextControlPlaceholderForegroundFocused}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
+                            <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBaseBrush}" />
+                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White3Brush}" />
                         </Trigger>
                         <Trigger Property="Text" Value="">
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Visibility" Value="Visible" />
@@ -180,9 +180,9 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Padding" Value="12,1,0,3" />
         <Setter Property="MaxDropDownHeight" Value="504" />
-        <Setter Property="Foreground" Value="{DynamicResource ComboBoxForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
+        <Setter Property="Background" Value="{DynamicResource OverlayBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource White2Brush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -197,7 +197,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="internals:ControlHelper.PlaceholderForeground" Value="{DynamicResource ComboBoxPlaceHolderForeground}" />
+        <Setter Property="internals:ControlHelper.PlaceholderForeground" Value="{DynamicResource White2Brush}" />
         <Setter Property="internals:ControlHelper.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource TextControlValidationErrorTemplate}" />
         <Setter Property="Template">
@@ -253,8 +253,8 @@
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            Background="{DynamicResource ComboBoxBackgroundUnfocused}"
-                            BorderBrush="{DynamicResource ComboBoxBackgroundBorderBrushUnfocused}"
+                            Background="{DynamicResource Accent2Brush}"
+                            BorderBrush="{DynamicResource White3Brush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}"
                             Opacity="0" />
@@ -326,7 +326,7 @@
                             Grid.Column="1"
                             IsHitTestVisible="False"
                             Margin="0,0,10,0"
-                            Foreground="{DynamicResource ComboBoxDropDownGlyphForeground}"
+                            Foreground="{DynamicResource White1Brush}"
                             FontFamily="{DynamicResource SymbolThemeFontFamily}"
                             FontSize="12"
                             HorizontalAlignment="Right"
@@ -357,17 +357,17 @@
                                 MinWidth="{Binding ActualWidth, ElementName=LayoutRoot}">
                                 <Border
                                     x:Name="PopupBorder"
-                                    Background="{DynamicResource ComboBoxDropDownBackground}"
+                                    Background="{DynamicResource OverlayBrush}"
                                     HorizontalAlignment="Stretch"
                                     CornerRadius="{DynamicResource ControlCornerRadius}">
                                     <Border
-                                        BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
+                                        BorderBrush="{DynamicResource White4Brush}"
                                         BorderThickness="1"
                                         Padding="0"
                                         CornerRadius="{Binding ElementName=PopupBorder, Path=CornerRadius}">
                                         <ScrollViewer
                                             x:Name="ScrollViewer"
-                                            Foreground="{DynamicResource ComboBoxDropDownForeground}"
+                                            Foreground="{DynamicResource ForegroundBaseBrush}"
                                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}">
@@ -385,16 +385,16 @@
                     <ControlTemplate.Triggers>
                         <!-- PointerOver -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource ComboBoxBackgroundPointerOver}" />
-                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrushPointerOver}" />
+                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource DarkBrush}" />
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource White1Brush}" />
                         </Trigger>
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource ComboBoxBackgroundDisabled}" />
-                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrushDisabled}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxForegroundDisabled}" />
-                            <Setter TargetName="PlaceholderTextBlock" Property="Foreground" Value="{DynamicResource ComboBoxPlaceHolderForegroundDisabled}" />
-                            <Setter TargetName="DropDownGlyph" Property="Foreground" Value="{DynamicResource ComboBoxDropDownGlyphForegroundDisabled}" />
+                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource White5Brush}" />
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource White5Brush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="PlaceholderTextBlock" Property="Foreground" Value="{DynamicResource White4Brush}" />
+                            <Setter TargetName="DropDownGlyph" Property="Foreground" Value="{DynamicResource White3Brush}" />
                         </Trigger>
                         <!-- FocusedDropDown -->
                         <MultiTrigger>
@@ -425,7 +425,7 @@
                                 <Condition SourceName="DropDownOverlay" Property="IsMouseOver" Value="False" />
                                 <Condition SourceName="DropDownOverlay" Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="DropDownGlyph" Property="Foreground" Value="{DynamicResource ComboBoxEditableDropDownGlyphForeground}" />
+                            <Setter TargetName="DropDownGlyph" Property="Foreground" Value="{DynamicResource White1Brush}" />
                             <Setter TargetName="DropDownOverlay" Property="Margin" Value="0,2,2,2" />
                         </MultiTrigger>
                         <!-- TextBoxFocusedOverlayPointerOver -->
@@ -434,7 +434,7 @@
                                 <Condition SourceName="PART_EditableTextBox" Property="IsSelectionActive" Value="True" />
                                 <Condition SourceName="DropDownOverlay" Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource ComboBoxFocusedDropDownBackgroundPointerOver}" />
+                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource White5Brush}" />
                             <Setter TargetName="DropDownOverlay" Property="Margin" Value="0,2,2,2" />
                         </MultiTrigger>
                         <!-- TextBoxFocusedOverlayPressed -->
@@ -443,7 +443,7 @@
                                 <Condition SourceName="PART_EditableTextBox" Property="IsSelectionActive" Value="True" />
                                 <Condition SourceName="DropDownOverlay" Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource ComboBoxFocusedDropDownBackgroundPointerPressed}" />
+                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource White3Brush}" />
                             <Setter TargetName="DropDownOverlay" Property="Margin" Value="0,2,2,2" />
                         </MultiTrigger>
                         <!-- TextBoxOverlayPointerOver -->
@@ -452,7 +452,7 @@
                                 <Condition SourceName="PART_EditableTextBox" Property="IsSelectionActive" Value="False" />
                                 <Condition SourceName="DropDownOverlay" Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource ComboBoxDropDownBackgroundPointerOver}" />
+                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource Accent3Brush}" />
                         </MultiTrigger>
                         <!-- TextBoxOverlayPressed -->
                         <MultiTrigger>
@@ -460,7 +460,7 @@
                                 <Condition SourceName="PART_EditableTextBox" Property="IsSelectionActive" Value="False" />
                                 <Condition SourceName="DropDownOverlay" Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource ComboBoxDropDownBackgroundPointerPressed}" />
+                            <Setter TargetName="DropDownOverlay" Property="Background" Value="{DynamicResource White4Brush}" />
                         </MultiTrigger>
 
                         <MultiTrigger>
