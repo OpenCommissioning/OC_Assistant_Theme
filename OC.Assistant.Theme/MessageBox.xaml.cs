@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace OC.Assistant.Theme;
@@ -27,18 +28,8 @@ public partial class MessageBox
     /// <returns></returns>
     public static MessageBoxResult Show(string caption, string text, MessageBoxButton button, MessageBoxImage image)
     {
-        _messageBox = new MessageBox
-        {
-            Text = { Text = text }, 
-            TitleLabel = { Text = caption },
-            Title = caption
-        };
-        SetVisibilityOfButtons(_messageBox, button);
-        SetImageOfMessageBox(_messageBox, image);
-        SetPositionAndShow();
-        return _result;
+        return Show(caption, new Label { VerticalAlignment = VerticalAlignment.Center, Content = text}, button, image);
     }
-    
     
     /// <summary>
     /// Shows the message box with the given parameters. 
