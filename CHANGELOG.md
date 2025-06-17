@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.12"></a>
+## [1.4.12](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.12) (2025-06-17)
+
+### Bug Fixes
+
+* limit the height for the MessageBox ([8d53ef0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/8d53ef018643a55f39475a62c9cb0b383a8bd1e9))
+
 <a name="1.4.11"></a>
 ## [1.4.11](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.11) (2025-05-28)
 
