@@ -13,7 +13,7 @@
             BorderBrush="{DynamicResource White5Brush}"
             CornerRadius="{DynamicResource ControlCornerRadius}"
             BorderThickness="1">
-        <Grid Margin="3" MinWidth="360" MinHeight="160">
+        <Grid Margin="3" MinWidth="360" MinHeight="160" MaxHeight="560">
             <Grid.RowDefinitions>
                 <RowDefinition Height="27" />
                 <RowDefinition Height="*"/>
