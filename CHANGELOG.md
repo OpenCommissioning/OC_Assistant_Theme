@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.4.13"></a>
+## [1.4.13](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.13) (2025-07-04)
+
+### Bug Fixes
+
+* prevent the busy overlay animation beeing started multiple times ([eaedfa3](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/eaedfa39f5188fbe89a18ccfed9c437ec7435e17))
+
 <a name="1.4.12"></a>
 ## [1.4.12](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.12) (2025-06-17)
 
