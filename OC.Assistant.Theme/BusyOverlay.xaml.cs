@@ -9,6 +9,7 @@ namespace OC.Assistant.Theme;
 public partial class BusyOverlay
 {
     private readonly RotateTransform _rotateTransform = new ();
+    private CancellationTokenSource? _cts;
     
     /// <summary>
     /// Creates a new instance of the <see cref="BusyOverlay"/>.
@@ -30,6 +31,7 @@ public partial class BusyOverlay
         {
             if (!isBusy)
             {
+                _cts?.Cancel();
                 Visibility = Visibility.Hidden;
                 return;
             }
@@ -56,17 +58,29 @@ public partial class BusyOverlay
     
     private void StartRotate()
     {
-        Task.Run(() =>
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+        
+        Task.Run(async () =>
         {
-            while (Visibility == Visibility.Visible)
+            try
             {
-                Dispatcher.Invoke((Action) (() =>
+                while (!token.IsCancellationRequested)
                 {
-                    _rotateTransform.Angle += 3.0;
-                    Grid.RenderTransform = _rotateTransform;
-                }));
-                Thread.Sleep(16);
+                    Dispatcher.Invoke(() =>
+                    {
+                        _rotateTransform.Angle += 3.0;
+                        Grid.RenderTransform = _rotateTransform;
+                    });
+
+                    await Task.Delay(16, token);
+                }
             }
-        });
+            catch
+            {
+                // ignore
+            }
+        }, token);
     }
 }
