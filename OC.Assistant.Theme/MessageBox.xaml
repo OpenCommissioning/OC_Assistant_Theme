@@ -28,28 +28,28 @@
                     <TextBlock Name="TitleLabel"/>
                 </Label>
             </Grid>
-            <Label x:Name="SymbolWarning" Margin="20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
+            <Label x:Name="SymbolWarning" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource WarningBrush}"
                    Visibility="Collapsed">
                 &#xE7BA;
             </Label>
-            <Label x:Name="SymbolError" Margin="20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
+            <Label x:Name="SymbolError" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource DangerBrush}"
                    Visibility="Collapsed">
                 &#xE783;
             </Label>
-            <Label x:Name="SymbolQuestion" Margin="20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
+            <Label x:Name="SymbolQuestion" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource InfoBrush}"
                    Visibility="Collapsed">
                 &#xF142;
             </Label>
-            <Label x:Name="SymbolInformation" Margin="20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
+            <Label x:Name="SymbolInformation" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource InfoBrush}"
                    Visibility="Collapsed">
                 &#xE946;
             </Label>
             <ScrollViewer Grid.Row="1" Grid.Column="1">
-                <Grid x:Name="ContentGrid" Margin="10,5,20,5" />
+                <Grid x:Name="ContentGrid" Margin="25,5,25,5" />
             </ScrollViewer>
             
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" >
