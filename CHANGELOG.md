@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.5.0"></a>
+## [1.5.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.5.0) (2025-07-09)
+
+### Features
+
+* new modal control ([093e5f4](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/093e5f415416c6202074f6fbd78aed672a42c3ee))
+
+### Bug Fixes
+
+* spacing for the MessageBox ([684e74f](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/684e74f9ad1274ec86ecbdf991901b516026e145))
+
 <a name="1.4.13"></a>
 ## [1.4.13](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.4.13) (2025-07-04)
 
