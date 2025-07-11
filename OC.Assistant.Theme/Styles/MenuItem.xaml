@@ -97,7 +97,7 @@
                 <Decorator>
                     <Border
                         x:Name="SubMenuRoot"
-                        Background="{DynamicResource OverlayBrush}"
+                        Background="{DynamicResource BackgroundBaseBrush}"
                         CornerRadius="{DynamicResource ControlCornerRadius}">
                         <Grid>
                             <ScrollViewer
@@ -316,7 +316,7 @@
                     <Decorator>
                         <Border
                             x:Name="SubMenuRoot"
-                            Background="{DynamicResource OverlayBrush}"
+                            Background="{DynamicResource BackgroundBaseBrush}"
                             CornerRadius="{DynamicResource ControlCornerRadius}">
                             <Grid>
                                 <ScrollViewer
@@ -444,7 +444,7 @@
                                 <Border
                                     Margin="0 10 0 0"
                                     x:Name="SubMenuRoot"
-                                    Background="{DynamicResource OverlayBrush}"
+                                    Background="{DynamicResource BackgroundBaseBrush}"
                                     CornerRadius="{DynamicResource ControlCornerRadius}">
                                     <Grid>
                                         <ScrollViewer
