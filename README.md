@@ -19,9 +19,10 @@ The official WPF Theme of the [Open Commissioning Assistant](https://github.com/
     </Application.Resources>
 </Application>
 ```
-4. Set the `UseTheme` property in your `MainWindow.xaml`:
+4. Replace the default `Window` class by the `theme:Window` class in your `MainWindow.xaml`.
+Content inside the TitleBar can als be rendered by setting `theme:Window.TitleBarContent` property.
 ```xml
-<Window x:Class="MyApplication.MainWindow"
+<theme:Window x:Class="MyApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -29,9 +30,13 @@ The official WPF Theme of the [Open Commissioning Assistant](https://github.com/
         xmlns:theme="http://schemas.open-commissioning-assistant.com/2024"
         mc:Ignorable="d"
         theme:WindowStyle.UseTheme="True">
+    <theme:Windows.TitleBarContent>
+        <!-- Here goes your titleBar content. Usually a Menu with MenuItems. -->
+    </theme:Windows.TitleBarContent>
     <Grid>
+        <!-- Here goes your main application content. -->
     </Grid>
-</Window>
+</theme:Window>
 ```
 
 > [!NOTE]

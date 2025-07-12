@@ -181,7 +181,7 @@
         <Setter Property="Padding" Value="12,1,0,3" />
         <Setter Property="MaxDropDownHeight" Value="504" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
-        <Setter Property="Background" Value="{DynamicResource OverlayBrush}" />
+        <Setter Property="Background" Value="{DynamicResource Dark1Brush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource White2Brush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
@@ -357,7 +357,7 @@
                                 MinWidth="{Binding ActualWidth, ElementName=LayoutRoot}">
                                 <Border
                                     x:Name="PopupBorder"
-                                    Background="{DynamicResource OverlayBrush}"
+                                    Background="{DynamicResource BackgroundBaseBrush}"
                                     HorizontalAlignment="Stretch"
                                     CornerRadius="{DynamicResource ControlCornerRadius}">
                                     <Border

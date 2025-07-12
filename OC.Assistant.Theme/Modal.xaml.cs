@@ -22,10 +22,14 @@ public partial class Modal
     /// </summary>
     /// <param name="caption">The title of the modal.</param>
     /// <param name="content">The content displayed within the modal, represented as a <see cref="UIElement"/>.</param>
-    /// <param name="button">The <see cref="MessageBoxButton"/> options available in the modal.</param>
-    /// <param name="image">The <see cref="MessageBoxImage"/> icon to display in the modal.</param>
+    /// <param name="button">The <see cref="MessageBoxButton"/> options.<br/>
+    /// Only accepts <see cref="MessageBoxButton.OK"/> and <see cref="MessageBoxButton.OKCancel"/>.</param>
+    /// <param name="image">The <see cref="MessageBoxImage"/> icon to display.<br/>
+    /// Only accepts <see cref="MessageBoxImage.Information"/>, <see cref="MessageBoxImage.Warning"/>,
+    /// <see cref="MessageBoxImage.Error"/> and <see cref="MessageBoxImage.Question"/>.</param>
     /// <returns>A <see cref="MessageBoxResult"/> indicating the user's interaction with the modal.</returns>
-    /// <exception cref="InvalidOperationException">Is thrown when the modal has not been created in the current application.</exception>
+    /// <exception cref="InvalidOperationException">Is thrown when the modal has not been created
+    /// or the modal has not been closed.</exception>
     public static async Task<MessageBoxResult> Show(string caption, UIElement content, MessageBoxButton button, MessageBoxImage image)
     {
         if (!_hasBeenCreated) throw new InvalidOperationException("Modal has not been created");
@@ -38,10 +42,14 @@ public partial class Modal
     /// </summary>
     /// <param name="caption">The title of the modal.</param>
     /// <param name="text">The text displayed within the modal.</param>
-    /// <param name="button">The <see cref="MessageBoxButton"/> options available in the modal.</param>
-    /// <param name="image">The <see cref="MessageBoxImage"/> icon to display in the modal.</param>
+    /// <param name="button">The <see cref="MessageBoxButton"/> options.<br/>
+    /// Only accepts <see cref="MessageBoxButton.OK"/> and <see cref="MessageBoxButton.OKCancel"/>.</param>
+    /// <param name="image">The <see cref="MessageBoxImage"/> icon to display.<br/>
+    /// Only accepts <see cref="MessageBoxImage.Information"/>, <see cref="MessageBoxImage.Warning"/>,
+    /// <see cref="MessageBoxImage.Error"/> and <see cref="MessageBoxImage.Question"/>.</param>
     /// <returns>A <see cref="MessageBoxResult"/> indicating the user's interaction with the modal.</returns>
-    /// <exception cref="InvalidOperationException">Is thrown when the modal has not been created in the current application.</exception>
+    /// <exception cref="InvalidOperationException">Is thrown when the modal has not been created
+    /// or the modal has not been closed.</exception>
     public static async Task<MessageBoxResult> Show(string caption, string text, MessageBoxButton button, MessageBoxImage image)
     {
         var content = new TextBlock
@@ -76,6 +84,10 @@ public partial class Modal
 
     private void OnShown(string caption, UIElement content, MessageBoxButton button, MessageBoxImage image)
     {
+        if (ContentGrid.Children.Count > 0)
+        {
+            throw new InvalidOperationException("Modal has not been closed");
+        }
         TitleLabel.Text = caption;
         ContentGrid.Children.Add(content);
         SetButtons(button);

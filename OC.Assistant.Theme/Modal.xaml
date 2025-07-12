@@ -7,9 +7,6 @@
     <Grid.Effect>
         <DropShadowEffect Color="Black" BlurRadius="20" Direction="315" ShadowDepth="5" Opacity="0.5"/>
     </Grid.Effect>
-    <Border>
-        <ContentPresenter Content="{Binding Content, ElementName=root}" />
-    </Border>
     <Border Background="{DynamicResource BackgroundOverlayBrush}" 
             BorderBrush="{DynamicResource White5Brush}"
             CornerRadius="{DynamicResource ControlCornerRadius}"

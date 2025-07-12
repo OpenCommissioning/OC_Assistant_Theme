@@ -4,8 +4,8 @@
 
     <Style x:Key="DefaultToolTipStyle" TargetType="ToolTip">
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
-        <Setter Property="Background" Value="{DynamicResource OverlayBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ForegroundBaseBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" />
@@ -18,19 +18,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
-                    <Decorator
-                        MaxWidth="320"
-                        SnapsToDevicePixels="True">
-                        <Border
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="{DynamicResource ControlCornerRadius}">
-                            <Border
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"
-                                CornerRadius="{DynamicResource ControlCornerRadius}">
-                                <ContentPresenter
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    <Decorator MaxWidth="320" SnapsToDevicePixels="True">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="{DynamicResource ControlCornerRadius}">
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter.ContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock 
+                                                Text="{Binding}" 
+                                                TextWrapping="Wrap"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </ContentPresenter.ContentTemplate>
+                                </ContentPresenter>
                             </Border>
                         </Border>
                     </Decorator>
