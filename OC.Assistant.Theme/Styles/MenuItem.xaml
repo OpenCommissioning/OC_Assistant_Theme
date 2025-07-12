@@ -57,7 +57,7 @@
 
     <ControlTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=TopLevelHeaderTemplateKey}" TargetType="MenuItem">
         <Grid
-            Height="32"
+            Height="{DynamicResource TitleBarHeight}"
             x:Name="ContentRoot"
             SnapsToDevicePixels="True">
             <Border 
