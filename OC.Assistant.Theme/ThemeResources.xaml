@@ -12,6 +12,9 @@
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
     <system:Double x:Key="ThemeFontSize">12</system:Double>
     
+    <!-- TitleBar -->
+    <system:Double x:Key="TitleBarHeight">36</system:Double>
+    
     <!-- Colors -->
     <SolidColorBrush x:Key="TransparentBrush" Color="#00000000" />
     <SolidColorBrush x:Key="AccentBrush" Color="#4571F5" />
@@ -33,7 +36,7 @@
     <SolidColorBrush x:Key="LinkBrush" Color="#6090F5" />
     <SolidColorBrush x:Key="SuccessBrush" Color="#32DD32" />
     <SolidColorBrush x:Key="Success1Brush" Color="#D032DD32" />
-    <SolidColorBrush x:Key="InfoBrush" Color="#76C6ED" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#76A6ED" />
     <SolidColorBrush x:Key="WarningBrush" Color="#EEC63F" />
     <SolidColorBrush x:Key="DangerBrush" Color="#BE4846" />
     
