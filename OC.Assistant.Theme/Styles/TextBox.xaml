@@ -49,9 +49,9 @@
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                 FontStyle="Normal"
-                                                FontSize="12"
+                                                FontSize="10"
                                                 FontFamily="{DynamicResource SymbolThemeFontFamily}">
-                                                &#xF78A;
+                                                &#xE106;
                                             </Label>
                                         </Border>
                                         <ControlTemplate.Triggers>
