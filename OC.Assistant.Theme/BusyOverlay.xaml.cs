@@ -10,22 +10,38 @@ public partial class BusyOverlay
 {
     private readonly RotateTransform _rotateTransform = new ();
     private CancellationTokenSource? _cts;
+    private static bool _hasBeenCreated;
     
     /// <summary>
     /// Creates a new instance of the <see cref="BusyOverlay"/>.
     /// </summary>
     public BusyOverlay()
     {
+        if (_hasBeenCreated) throw new InvalidOperationException("BusyOverlay can only be created once");
+        _hasBeenCreated = true;
         InitializeComponent();
         Size = 100;
+        StateChanged += OnStateChanged;
     }
 
     /// <summary>
-    /// Sets the busy state.
+    /// Is triggered when the state of the <see cref="BusyOverlay"/> changes.
     /// </summary>
-    /// <param name="isBusy"><br/><c>True</c> : The overlay is visible and animated. <br/>
-    /// <c>False</c>: The overlay is hidden.</param>
-    public void SetState(bool isBusy)
+    public static event Action<bool>? StateChanged;
+
+    /// <summary>
+    /// Sets the state of the <see cref="BusyOverlay"/>.
+    /// </summary>
+    /// <param name="isBusy">
+    /// <c>true</c> to activate the busy overlay; <c>false</c> to deactivate it.
+    /// </param>
+    public static void SetState(bool isBusy)
+    {
+        if (!_hasBeenCreated) throw new InvalidOperationException("BusyOverlay has not been created");
+        StateChanged?.Invoke(isBusy);
+    }
+    
+    private void OnStateChanged(bool isBusy)
     {
         Dispatcher.Invoke(() =>
         {
