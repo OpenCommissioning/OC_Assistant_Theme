@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.0.0"></a>
+## [2.0.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.0.0) (2025-07-12)
+
+### Features
+
+* new window class implementing a custom TitleBar, Modal and BusyOverlay ([7346a0f](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/7346a0fe27f94978b0fbd1ac759ea07140bf3a2e))
+
+### Bug Fixes
+
+* adjust the default MenuItem height to match the new custom TitleBar ([5fe4809](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/5fe48091b8e0bfa4884049457b6e247f6d78ffc1))
+* remove the now deprecated Windowstyle class ([fbd1234](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/fbd123422cb40a8127742281ee2893cbb074df7a))
+* **ComboBox:** color adjustment for Background ([bfd10cf](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/bfd10cf68199a9af7b73c2cfbe991648e3ec1233))
+* **MenuItem:** color adjustment for Background ([7f1322c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/7f1322c49a3b12cef3f44394675f8059bd136322))
+* **TextBox:** adjust clear button icon ([082561e](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/082561ea479c852dc5fceb87e474a7a658b64a43))
+* **ThemeResources:** adjust InfoBrush, add TitleBarHeight ([6fba00c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/6fba00c8b0b3dae9ea1ef2dc85f372b2885ae166))
+* **Tooltip:** text wrapping and color adjustments for better visibility ([4c94728](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/4c9472868d6c3f09b8b82b9e932c3a7536f0b31d))
+
+### Breaking Changes
+
+* remove the now deprecated Windowstyle class ([fbd1234](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/fbd123422cb40a8127742281ee2893cbb074df7a))
+
 <a name="1.5.0"></a>
 ## [1.5.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v1.5.0) (2025-07-09)
 
