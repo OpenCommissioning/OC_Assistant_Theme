@@ -57,6 +57,26 @@ public abstract class Window : System.Windows.Window
         InitializeComponent();
     }
     
+    /// <summary>
+    /// Retrieves the corner radius applied to the application window based on the current operating system version.
+    /// </summary>
+    private static CornerRadius GetApplicationCornerRadius()
+    {
+        try
+        {
+            var buildNumber = Registry.GetValue(
+                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
+                "CurrentBuild", null) as string;
+            
+            var isWindows11 = int.TryParse(buildNumber, out var build) && build >= 22000;
+            return new CornerRadius(isWindows11 ? 12 : 0);
+        }
+        catch
+        {
+            return new CornerRadius(0);
+        }
+    }
+    
     private void InitializeComponent()
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
@@ -68,18 +88,12 @@ public abstract class Window : System.Windows.Window
         var white5 = (SolidColorBrush)FindResource("White5Brush");
         var white6 = (SolidColorBrush)FindResource("White6Brush");
         
-        var buildNumber = Registry.GetValue(
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
-            "CurrentBuild", null) as string;
-        
-        var isWindows11 = int.TryParse(buildNumber, out var build) && build >= 22000;
-        
         var chrome = new WindowChrome
         {
             CaptionHeight = titleBarHeight,
             ResizeBorderThickness = new Thickness(6),
             GlassFrameThickness = new Thickness(0),
-            CornerRadius = new CornerRadius(isWindows11 ? 12 : 0) 
+            CornerRadius = GetApplicationCornerRadius() 
         };
         WindowChrome.SetWindowChrome(this, chrome);
         
