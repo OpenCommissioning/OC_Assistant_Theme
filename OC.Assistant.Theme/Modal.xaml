@@ -39,7 +39,10 @@
             <Label x:Name="SymbolQuestion" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource InfoBrush}"
                    Visibility="Collapsed">
-                &#xF142;
+                <Grid>
+                    <TextBlock Margin="2, -2, 0, 0">&#xF142;</TextBlock>
+                    <TextBlock>&#xEA3A;</TextBlock>
+                </Grid>
             </Label>
             <Label x:Name="SymbolInformation" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
                    Foreground="{DynamicResource InfoBrush}"
