@@ -56,17 +56,17 @@ public abstract class Window : System.Windows.Window
     {
         InitializeComponent();
     }
-
+    
     private void InitializeComponent()
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
         
-        var titleBarHeight = (double)Application.Current.Resources["TitleBarHeight"];
-        var background = Application.Current.Resources["BackgroundBaseBrush"] as SolidColorBrush;
-        var foreground = Application.Current.Resources["ForegroundBaseBrush"] as SolidColorBrush;
-        var white4 = Application.Current.Resources["White4Brush"] as SolidColorBrush;
-        var white5 = Application.Current.Resources["White5Brush"] as SolidColorBrush;
-        var white6 = Application.Current.Resources["White6Brush"] as SolidColorBrush;
+        var titleBarHeight = (double)FindResource("TitleBarHeight");
+        var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
+        var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
+        var white4 = (SolidColorBrush)FindResource("White4Brush");
+        var white5 = (SolidColorBrush)FindResource("White5Brush");
+        var white6 = (SolidColorBrush)FindResource("White6Brush");
         
         var buildNumber = Registry.GetValue(
             @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
@@ -136,11 +136,9 @@ public abstract class Window : System.Windows.Window
         var appIcon = new Image
         {
             Visibility = Visibility.Collapsed,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center,
-            Height = 20,
-            Width = 20,
-            Margin = new Thickness(10, 0, 10, 0)
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Stretch,
+            Margin = new Thickness(10, 8, 10, 8)
         };
         Grid.SetColumn(appIcon, 0);
 
@@ -256,6 +254,7 @@ public abstract class Window : System.Windows.Window
             restoreButton.Foreground = foreground;
             closeButton.Foreground = foreground;
             titleBarGrid.Background = white6;
+            title.IsEnabled = true;
         }
             
         void ApplicationOnDeactivated(object? sender, EventArgs e)
@@ -265,6 +264,7 @@ public abstract class Window : System.Windows.Window
             restoreButton.Foreground = white4;
             closeButton.Foreground = white4;
             titleBarGrid.Background = white5;
+            title.IsEnabled = false;
         }
             
         void WindowOnStateChanged(object? sender, EventArgs e)
