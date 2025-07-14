@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
 namespace OC.Assistant.Theme;
@@ -10,8 +9,6 @@ namespace OC.Assistant.Theme;
 /// </summary>
 public partial class Modal
 {
-    private readonly DoubleAnimation _fadeIn = new(0, 1, TimeSpan.FromMilliseconds(100));
-    private readonly DoubleAnimation _fadeOut = new(1, 0, TimeSpan.FromMilliseconds(100));
     private static bool _hasBeenCreated;
     
     private static event Action<string, UIElement, MessageBoxButton, MessageBoxImage>? Shown;
@@ -78,7 +75,6 @@ public partial class Modal
         _hasBeenCreated = true;
         InitializeComponent();
         Visibility = Visibility.Collapsed;
-        _fadeOut.Completed += FadeOutOnCompleted;
         Shown += OnShown;
     }
 
@@ -92,7 +88,7 @@ public partial class Modal
         ContentGrid.Children.Add(content);
         SetButtons(button);
         SetImage(image);
-        FadeIn();
+        Show();
     }
     
     private static async Task<MessageBoxResult> WaitForClosed()
@@ -130,27 +126,21 @@ public partial class Modal
     {
         var result = sender.Equals(ButtonOk) ? MessageBoxResult.OK : MessageBoxResult.Cancel;
         Closed?.Invoke(result);
-        FadeOut();
+        Hide();
     }
     
-    private void FadeIn()
+    private void Show()
     {
         Visibility = Visibility.Visible;
-        BeginAnimation(OpacityProperty, _fadeIn);
         if (BlurEffect is null) return;
         BlurEffect.Radius = 6;
     }
     
-    private void FadeOut()
-    {
-        BeginAnimation(OpacityProperty, _fadeOut);
-        if (BlurEffect is null) return;
-        BlurEffect.Radius = 0;
-    }
-    
-    private void FadeOutOnCompleted(object? sender, EventArgs e)
+    private void Hide()
     {
         Visibility = Visibility.Collapsed;
         ContentGrid.Children.Clear();
+        if (BlurEffect is null) return;
+        BlurEffect.Radius = 0;
     }
 }
