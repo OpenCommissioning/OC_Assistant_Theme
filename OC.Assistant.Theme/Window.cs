@@ -240,15 +240,15 @@ public abstract class Window : System.Windows.Window
 
         void WindowOnInitialized(object? sender, EventArgs e)
         {
-            if (ShowIcon)
+            if (ShowIcon && IconHelper.GetEmbeddedAppIcon() is {} source)
             {
+                appIcon.Source = source;
                 appIcon.Visibility = Visibility.Visible;
-                appIcon.Source = IconHelper.GetEmbeddedAppIcon();
             }
             
             if (ShowTitle)
             {
-                title.Margin = new Thickness(ShowIcon ? 0 : 10, 0, 0, 0);
+                title.Margin = new Thickness(appIcon.Source is null ? 10 : 0, 0, 10, 0);
                 title.Visibility = Visibility.Visible;
                 title.Content = Title;
             }
