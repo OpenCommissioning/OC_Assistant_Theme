@@ -4,7 +4,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shell;
-using Microsoft.Win32;
 using OC.Assistant.Theme.Internals;
 
 namespace OC.Assistant.Theme;
@@ -56,27 +55,7 @@ public abstract class Window : System.Windows.Window
     {
         InitializeComponent();
     }
-    
-    /// <summary>
-    /// Retrieves the corner radius applied to the application window based on the current operating system version.
-    /// </summary>
-    private static CornerRadius GetApplicationCornerRadius()
-    {
-        try
-        {
-            var buildNumber = Registry.GetValue(
-                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
-                "CurrentBuild", null) as string;
-            
-            var isWindows11 = int.TryParse(buildNumber, out var build) && build >= 22000;
-            return new CornerRadius(isWindows11 ? 12 : 0);
-        }
-        catch
-        {
-            return new CornerRadius(0);
-        }
-    }
-    
+
     private void InitializeComponent()
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
@@ -88,19 +67,15 @@ public abstract class Window : System.Windows.Window
         var white5 = (SolidColorBrush)FindResource("White5Brush");
         var white6 = (SolidColorBrush)FindResource("White6Brush");
         
-        var chrome = new WindowChrome
+        WindowChrome.SetWindowChrome(this, new WindowChrome
         {
             CaptionHeight = titleBarHeight,
-            ResizeBorderThickness = new Thickness(6),
-            GlassFrameThickness = new Thickness(0),
-            CornerRadius = new CornerRadius(0) 
-        };
-        WindowChrome.SetWindowChrome(this, chrome);
+            ResizeBorderThickness = new Thickness(5),
+        });
         
         var rootBorder = new Border
         {
-            BorderBrush = white4,
-            BorderThickness = new Thickness(1)
+            BorderThickness = new Thickness(0)
         };
 
         var rootGrid = new Grid();
@@ -286,14 +261,12 @@ public abstract class Window : System.Windows.Window
             if (WindowState == WindowState.Maximized)
             {
                 rootBorder.Margin = new Thickness(8);
-                rootBorder.BorderBrush = background;
                 restoreButton.Visibility = Visibility.Visible;
                 maximizeButton.Visibility = Visibility.Collapsed;
                 return;
             }
 
             rootBorder.Margin = new Thickness(0);
-            rootBorder.BorderBrush = white4;
             restoreButton.Visibility = Visibility.Collapsed;
             maximizeButton.Visibility = Visibility.Visible;
         }
