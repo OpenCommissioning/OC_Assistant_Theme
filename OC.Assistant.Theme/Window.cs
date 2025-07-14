@@ -93,14 +93,14 @@ public abstract class Window : System.Windows.Window
             CaptionHeight = titleBarHeight,
             ResizeBorderThickness = new Thickness(6),
             GlassFrameThickness = new Thickness(0),
-            CornerRadius = GetApplicationCornerRadius() 
+            CornerRadius = new CornerRadius(0) 
         };
         WindowChrome.SetWindowChrome(this, chrome);
         
         var rootBorder = new Border
         {
-            BorderBrush = background,
-            BorderThickness = new Thickness(0)
+            BorderBrush = white4,
+            BorderThickness = new Thickness(1)
         };
 
         var rootGrid = new Grid();
@@ -152,7 +152,7 @@ public abstract class Window : System.Windows.Window
             Visibility = Visibility.Collapsed,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Stretch,
-            Margin = new Thickness(10, 8, 10, 8)
+            Margin = new Thickness(8, 6, 8, 6)
         };
         Grid.SetColumn(appIcon, 0);
 
@@ -285,13 +285,15 @@ public abstract class Window : System.Windows.Window
         {
             if (WindowState == WindowState.Maximized)
             {
-                rootBorder.BorderThickness = new Thickness(8);
+                rootBorder.Margin = new Thickness(8);
+                rootBorder.BorderBrush = background;
                 restoreButton.Visibility = Visibility.Visible;
                 maximizeButton.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            rootBorder.BorderThickness = new Thickness(0);
+            rootBorder.Margin = new Thickness(0);
+            rootBorder.BorderBrush = white4;
             restoreButton.Visibility = Visibility.Collapsed;
             maximizeButton.Visibility = Visibility.Visible;
         }
