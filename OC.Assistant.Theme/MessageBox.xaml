@@ -10,7 +10,7 @@
         FontSize="{DynamicResource ThemeFontSize}"
         Background="Transparent">
     <Border Background="{DynamicResource BackgroundOverlayBrush}" 
-            BorderBrush="{DynamicResource White5Brush}"
+            BorderBrush="{DynamicResource OverlayBorderBrush}"
             CornerRadius="{DynamicResource ControlCornerRadius}"
             BorderThickness="1">
         <Grid Margin="3" MinWidth="360" MinHeight="160" MaxHeight="560">
