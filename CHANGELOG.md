@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.0.1) (2025-07-15)
+
+### Bug Fixes
+
+* remove animations for Menu Popup and Modal ([df0e7b3](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/df0e7b31ce40e781acfa5a1922b248600d71effb))
+* **Button:** don't change the Background when disabled ([240043d](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/240043d2a47392b259196917850456c21ec93274))
+* **LinkButton:** show the Hand cursor by default ([32eda1f](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/32eda1f0492ed8626461b2a3dc1aecfefda8f426))
+* **MessageBox:** adjust border brush ([1ceeb24](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/1ceeb2414631e3bd781a15633f0de78e90ecdd42))
+* **MessageBox:** adjust the question symbol ([11172ad](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/11172ad98707137cdab078796957ab6380f95a64))
+* **Modal:** adjust the question symbol ([6ce7c99](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/6ce7c99fd1f52f1f7e726f73f2c5a873e0ea23f1))
+* **TitleBar:** margin adjustments ([5eb8c27](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/5eb8c27090ad4b3be4fe09754f3ce42222966f23))
+* **Window:** adjust TitleBar and Border behaviour ([15628e8](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/15628e86404f5dead572bb2014142f069a1573b2))
+* **Window:** catch error if reading the windows build number fails ([bc79638](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/bc79638da051c50f6e99c8a922048ddcc782a69a))
+
 <a name="2.0.0"></a>
 ## [2.0.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.0.0) (2025-07-12)
 
