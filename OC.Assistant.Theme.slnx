@@ -1,3 +1,4 @@
 ﻿<Solution>
   <Project Path="OC.Assistant.Theme\OC.Assistant.Theme.csproj" Type="Classic C#" />
+  <Project Path="Showcase\Showcase.csproj" Type="Classic C#" />
 </Solution>
