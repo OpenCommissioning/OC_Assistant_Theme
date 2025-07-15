@@ -13,7 +13,7 @@
     <system:Double x:Key="ThemeFontSize">12</system:Double>
     
     <!-- TitleBar -->
-    <system:Double x:Key="TitleBarHeight">36</system:Double>
+    <system:Double x:Key="TitleBarHeight">30</system:Double>
     
     <!-- Colors -->
     <SolidColorBrush x:Key="TransparentBrush" Color="#00000000" />

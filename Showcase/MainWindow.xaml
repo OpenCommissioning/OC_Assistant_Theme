@@ -1,0 +1,57 @@
+﻿<theme:Window x:Class="ThemeTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:theme="clr-namespace:OC.Assistant.Theme;assembly=OC.Assistant.Theme"
+        ShowIcon="True"
+        ShowTitle="False"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <theme:Window.TitleBarContent>
+        <Grid>
+            <Menu HorizontalAlignment="Left" VerticalAlignment="Center">
+                <MenuItem Header="Menu">
+                    <MenuItem Header="MenuItem1" FontFamily="{DynamicResource ThemeFontFamily}">
+                        <MenuItem Header="SubMenuItem1"></MenuItem>
+                        <MenuItem Header="SubMenuItem2"></MenuItem>
+                        <MenuItem Header="SubMenuItem3"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="MenuItem2" FontFamily="{DynamicResource ThemeFontFamily}"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="MenuItem3" FontFamily="{DynamicResource ThemeFontFamily}"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button
+                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                    FontSize="14"
+                    ToolTip="ToolTip"
+                    Content="&#xE712;" 
+                    Click="ShowModalOnClick"/>
+                <Border Width="1" Background="{DynamicResource White4Brush}" Margin="6 8 0 8"/>
+            </StackPanel>
+        </Grid>
+    </theme:Window.TitleBarContent>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Top">
+            <Label Margin="10">Label</Label>
+            <Button Margin="10" Background="{DynamicResource White6Brush}" Click="ButtonMessageBoxOnClick">Show MessageBox</Button>
+            <Button Margin="10" Background="{DynamicResource White6Brush}" Click="ButtonBusyOverlayOnClick">Show BusyOverlay</Button>
+            <Button Margin="10" Style="{DynamicResource LinkButton}" Click="LinkButtonOnClick">github link</Button>
+            <ToggleButton Margin="10">ToggleButton</ToggleButton>
+            <CheckBox Margin="10">CheckBox</CheckBox>
+            <ComboBox Margin="10" SelectedIndex="0">
+                <ComboBoxItem>ComboBoxItem1</ComboBoxItem>
+                <ComboBoxItem>ComboBoxItem2</ComboBoxItem>
+                <ComboBoxItem>ComboBoxItem3</ComboBoxItem>
+            </ComboBox>
+            <TextBox Margin="10">TextBox</TextBox>
+        </StackPanel>
+        <theme:LogViewer x:Name="LogViewer" Grid.Row="1" Height="150" VerticalAlignment="Bottom"></theme:LogViewer>
+    </Grid>
+</theme:Window>

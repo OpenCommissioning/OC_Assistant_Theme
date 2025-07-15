@@ -92,7 +92,7 @@
                 AllowsTransparency="true"
                 Focusable="false"
                 IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                PopupAnimation="None"
                 Placement="Bottom">
                 <Decorator>
                     <Border
@@ -130,9 +130,6 @@
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
                 <Setter Property="Visibility" TargetName="HeaderText" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
-                <Setter TargetName="PART_Popup" Property="PopupAnimation" Value="None" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Background" Property="Background" Value="{DynamicResource White5Brush}" />
@@ -301,7 +298,7 @@
                     AllowsTransparency="true"
                     Focusable="false"
                     IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                    PopupAnimation="None"
                     Placement="Right"
                     PlacementTarget="{Binding ElementName=LayoutRoot}">
                     <Popup.PlacementRectangle>
@@ -345,9 +342,6 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
-                <Setter TargetName="PART_Popup" Property="PopupAnimation" Value="None" />
-            </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter Property="Visibility" TargetName="IconRoot" Value="Collapsed" />
             </Trigger>
@@ -438,7 +432,7 @@
                             AllowsTransparency="true"
                             Focusable="false"
                             IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                            PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                            PopupAnimation="None"
                             Placement="Bottom">
                             <Decorator>
                                 <Border

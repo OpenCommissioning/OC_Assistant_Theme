@@ -1,0 +1,10 @@
+﻿<Application x:Class="ThemeTest.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:theme="clr-namespace:OC.Assistant.Theme;assembly=OC.Assistant.Theme"
+             xmlns:local="clr-namespace:ThemeTest"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         <theme:ResourceDictionary></theme:ResourceDictionary>
+    </Application.Resources>
+</Application>

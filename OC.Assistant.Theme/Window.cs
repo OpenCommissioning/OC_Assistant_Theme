@@ -4,7 +4,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shell;
-using Microsoft.Win32;
 using OC.Assistant.Theme.Internals;
 
 namespace OC.Assistant.Theme;
@@ -41,7 +40,7 @@ public abstract class Window : System.Windows.Window
             typeof(object),
             typeof(Window),
             new PropertyMetadata(null));
-
+    
     /// <summary>
     /// Gets or sets the custom content to be displayed in the title bar of the window.
     /// </summary>
@@ -61,31 +60,22 @@ public abstract class Window : System.Windows.Window
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
         
-        var titleBarHeight = (double)Application.Current.Resources["TitleBarHeight"];
-        var background = Application.Current.Resources["BackgroundBaseBrush"] as SolidColorBrush;
-        var foreground = Application.Current.Resources["ForegroundBaseBrush"] as SolidColorBrush;
-        var white4 = Application.Current.Resources["White4Brush"] as SolidColorBrush;
-        var white5 = Application.Current.Resources["White5Brush"] as SolidColorBrush;
-        var white6 = Application.Current.Resources["White6Brush"] as SolidColorBrush;
+        var titleBarHeight = (double)FindResource("TitleBarHeight");
+        var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
+        var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
+        var white4 = (SolidColorBrush)FindResource("White4Brush");
+        var white5 = (SolidColorBrush)FindResource("White5Brush");
+        var white6 = (SolidColorBrush)FindResource("White6Brush");
         
-        var buildNumber = Registry.GetValue(
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
-            "CurrentBuild", null) as string;
-        
-        var isWindows11 = int.TryParse(buildNumber, out var build) && build >= 22000;
-        
-        var chrome = new WindowChrome
+        WindowChrome.SetWindowChrome(this, new WindowChrome
         {
             CaptionHeight = titleBarHeight,
-            ResizeBorderThickness = new Thickness(6),
-            GlassFrameThickness = new Thickness(0),
-            CornerRadius = new CornerRadius(isWindows11 ? 12 : 0) 
-        };
-        WindowChrome.SetWindowChrome(this, chrome);
+            ResizeBorderThickness = new Thickness(5),
+            GlassFrameThickness = new Thickness(1)
+        });
         
         var rootBorder = new Border
         {
-            BorderBrush = background,
             BorderThickness = new Thickness(0)
         };
 
@@ -136,11 +126,9 @@ public abstract class Window : System.Windows.Window
         var appIcon = new Image
         {
             Visibility = Visibility.Collapsed,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center,
-            Height = 20,
-            Width = 20,
-            Margin = new Thickness(10, 0, 10, 0)
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Stretch,
+            Margin = new Thickness(8, 6, 8, 6)
         };
         Grid.SetColumn(appIcon, 0);
 
@@ -228,15 +216,15 @@ public abstract class Window : System.Windows.Window
 
         void WindowOnInitialized(object? sender, EventArgs e)
         {
-            if (ShowIcon)
+            if (ShowIcon && IconHelper.GetEmbeddedAppIcon() is {} source)
             {
+                appIcon.Source = source;
                 appIcon.Visibility = Visibility.Visible;
-                appIcon.Source = IconHelper.GetEmbeddedAppIcon();
             }
             
             if (ShowTitle)
             {
-                title.Margin = new Thickness(ShowIcon ? 0 : 10, 0, 0, 0);
+                title.Margin = new Thickness(appIcon.Source is null ? 10 : 0, 0, 10, 0);
                 title.Visibility = Visibility.Visible;
                 title.Content = Title;
             }
@@ -256,6 +244,7 @@ public abstract class Window : System.Windows.Window
             restoreButton.Foreground = foreground;
             closeButton.Foreground = foreground;
             titleBarGrid.Background = white6;
+            title.IsEnabled = true;
         }
             
         void ApplicationOnDeactivated(object? sender, EventArgs e)
@@ -265,19 +254,20 @@ public abstract class Window : System.Windows.Window
             restoreButton.Foreground = white4;
             closeButton.Foreground = white4;
             titleBarGrid.Background = white5;
+            title.IsEnabled = false;
         }
             
         void WindowOnStateChanged(object? sender, EventArgs e)
         {
             if (WindowState == WindowState.Maximized)
             {
-                rootBorder.BorderThickness = new Thickness(8);
+                rootBorder.Margin = new Thickness(8);
                 restoreButton.Visibility = Visibility.Visible;
                 maximizeButton.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            rootBorder.BorderThickness = new Thickness(0);
+            rootBorder.Margin = new Thickness(0);
             restoreButton.Visibility = Visibility.Collapsed;
             maximizeButton.Visibility = Visibility.Visible;
         }

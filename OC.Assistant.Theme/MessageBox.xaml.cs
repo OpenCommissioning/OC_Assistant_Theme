@@ -63,6 +63,8 @@ public partial class MessageBox
         _messageBox.WindowStartupLocation = WindowStartupLocation.Manual;
         _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - content.DesiredSize.Height / 2;
         _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
+        _messageBox.Height = content.DesiredSize.Height;
+        _messageBox.Width = content.DesiredSize.Width;
         _messageBox.ShowDialog();
     }
 
