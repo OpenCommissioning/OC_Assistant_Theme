@@ -36,12 +36,12 @@
                    Visibility="Collapsed">
                 &#xE783;
             </Label>
-            <Label x:Name="SymbolQuestion" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
+            <Label x:Name="SymbolQuestion" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}"
                    Foreground="{DynamicResource InfoBrush}"
                    Visibility="Collapsed">
                 <Grid>
-                    <TextBlock Margin="2, -2, 0, 0">&#xF142;</TextBlock>
-                    <TextBlock>&#xEA3A;</TextBlock>
+                    <TextBlock FontSize="45">&#xF142;</TextBlock>
+                    <TextBlock FontSize="44" Margin="-1, 2, 0, 0">&#xEA3A;</TextBlock>
                 </Grid>
             </Label>
             <Label x:Name="SymbolInformation" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 

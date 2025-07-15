@@ -32,7 +32,6 @@
     <SolidColorBrush x:Key="White6Brush" Color="#0AFFFFFF" />
     <SolidColorBrush x:Key="BackgroundBaseBrush" Color="#222529" />
     <SolidColorBrush x:Key="BackgroundOverlayBrush" Color="#26292D" />
-    <SolidColorBrush x:Key="OverlayBorderBrush" Color="#36393D" />
     <SolidColorBrush x:Key="ForegroundBaseBrush" Color="#E8E8E8" />
     <SolidColorBrush x:Key="LinkBrush" Color="#6090F5" />
     <SolidColorBrush x:Key="SuccessBrush" Color="#32DD32" />

@@ -40,7 +40,7 @@ public abstract class Window : System.Windows.Window
             typeof(object),
             typeof(Window),
             new PropertyMetadata(null));
-
+    
     /// <summary>
     /// Gets or sets the custom content to be displayed in the title bar of the window.
     /// </summary>
@@ -71,6 +71,7 @@ public abstract class Window : System.Windows.Window
         {
             CaptionHeight = titleBarHeight,
             ResizeBorderThickness = new Thickness(5),
+            GlassFrameThickness = new Thickness(1)
         });
         
         var rootBorder = new Border
