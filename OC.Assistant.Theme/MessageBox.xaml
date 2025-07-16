@@ -4,65 +4,81 @@
         FontFamily="{DynamicResource ThemeFontFamily}"
         FontSize="{DynamicResource ThemeFontSize}"
         Background="{DynamicResource BackgroundOverlayBrush}"
-        ShowInTaskbar="False"
-        Topmost="True">
+        ShowInTaskbar="False">
     <WindowChrome.WindowChrome>
         <WindowChrome 
             ResizeBorderThickness="0" 
             CaptionHeight="0" 
-            GlassFrameThickness="1"/>
+            GlassFrameThickness="1 0 0 0"/>
     </WindowChrome.WindowChrome>
-    <Grid Margin="3" >
-        <Grid MinWidth="360" MinHeight="160" MaxHeight="560">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="27" />
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="{DynamicResource BackgroundOverlayBrush}">
-                <Label HorizontalAlignment="Left" Margin="6,6,0,0" >
-                    <TextBlock Name="TitleLabel"/>
-                </Label>
-            </Grid>
-            <Label x:Name="SymbolWarning" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
-                   Foreground="{DynamicResource WarningBrush}"
-                   Visibility="Collapsed">
-                &#xE7BA;
+    <Grid MinWidth="360" MinHeight="160" MaxHeight="560" IsHitTestVisible="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
+              Background="{DynamicResource BackgroundOverlayBrush}"
+              MouseLeftButtonDown="OnMouseLeftButtonDown">
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" >
+                <TextBlock Name="TitleLabel"/>
             </Label>
-            <Label x:Name="SymbolError" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
-                   Foreground="{DynamicResource DangerBrush}"
-                   Visibility="Collapsed">
-                &#xE783;
-            </Label>
-            <Label x:Name="SymbolQuestion" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                   Foreground="{DynamicResource InfoBrush}"
+            <Button Style="{DynamicResource CloseButtonStyle}" Width="30" HorizontalAlignment="Right" Click="CloseButtonOnClick"></Button>
+        </Grid>
+        <Grid Margin="20 23 0 20" Grid.Row="1" Grid.Column="0">
+            <Label x:Name="SymbolWarning" 
+                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                   FontSize="36"
                    Visibility="Collapsed">
                 <Grid>
-                    <TextBlock FontSize="45">&#xF142;</TextBlock>
-                    <TextBlock FontSize="44" Margin="-1, 2, 0, 0">&#xEA3A;</TextBlock>
+                    <TextBlock Foreground="{DynamicResource WarningBrush}">&#xF139;</TextBlock>
+                    <TextBlock Foreground="{DynamicResource BackgroundBaseBrush}">&#xF13B;</TextBlock>
                 </Grid>
             </Label>
-            <Label x:Name="SymbolInformation" Margin="20 20 0 20" Grid.Row="1" Grid.Column="0" FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="46" 
-                   Foreground="{DynamicResource InfoBrush}"
+            <Label x:Name="SymbolError"
+                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                   FontSize="36" 
                    Visibility="Collapsed">
-                &#xE946;
+                <Grid>
+                    <TextBlock Foreground="{DynamicResource DangerBrush}">&#xF136;</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ForegroundBaseBrush}">&#xF13D;</TextBlock>
+                </Grid>
             </Label>
-            <ScrollViewer Grid.Row="1" Grid.Column="1">
-                <Grid x:Name="ContentGrid" Margin="25,5,25,5" />
-            </ScrollViewer>
-            
-            <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" >
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
-                    <Button Name="ButtonOk" Content="OK" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
-                    <Button Name="ButtonYes" Content="Yes" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
-                    <Button Name="ButtonNo" Content="No" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
-                    <Button Name="ButtonCancel" Content="Cancel" MinWidth="70" Height="32" Click="Button_Click" Background="{DynamicResource White5Brush}"/>
-                </StackPanel>
-            </Grid>
+            <Label x:Name="SymbolQuestion"
+                   FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                   FontSize="36"
+                   Visibility="Collapsed">
+                <Grid>
+                    <TextBlock Foreground="{DynamicResource AccentBrush}">&#xF136;</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ForegroundBaseBrush}">&#xF142;</TextBlock>
+                </Grid>
+            </Label>
+            <Label x:Name="SymbolInformation"
+                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                   FontSize="36"
+                   Visibility="Collapsed">
+                <Grid>
+                    <TextBlock Foreground="{DynamicResource AccentBrush}">&#xF136;</TextBlock>
+                    <TextBlock Foreground="{DynamicResource ForegroundBaseBrush}">&#xF13F;</TextBlock>
+                </Grid>
+            </Label>
+        </Grid>
+        
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="0,10">
+            <Grid x:Name="ContentGrid" Margin="25,0" />
+        </ScrollViewer>
+        
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Margin="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+                <Button x:Name="ButtonOk" Content="OK" MinWidth="70" Click="ButtonOnClick" Style="{DynamicResource ButtonPrimary}"/>
+                <Button x:Name="ButtonYes" Content="Yes" MinWidth="70" Click="ButtonOnClick" Style="{DynamicResource ButtonPrimary}"/>
+                <Button x:Name="ButtonNo" Content="No" MinWidth="70" Click="ButtonOnClick" Style="{DynamicResource ButtonSecondary}"/>
+                <Button x:Name="ButtonCancel" Content="Cancel" MinWidth="70" Click="ButtonOnClick" Style="{DynamicResource ButtonSecondary}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

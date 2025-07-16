@@ -38,6 +38,8 @@ public enum MessageType
 /// <param name="type">The message type.</param>
 internal class Message(object sender, string message, MessageType type)
 {
+    private static System.Windows.ResourceDictionary Resources { get; } = Application.Current.Resources;
+    
     /// <summary>
     /// Gets a <see cref="DateTime"/> value that represents the time of creation of this instance.
     /// </summary>
@@ -57,27 +59,45 @@ internal class Message(object sender, string message, MessageType type)
     /// The message text.
     /// </summary>
     public string Text => message;
-    
+
     /// <summary>
-    /// The icon depending on the <see cref="MessageType"/>.
+    /// The outer icon depending on the <see cref="MessageType"/>.
     /// </summary>
-    public string Icon => Type switch
+    public object IconBackground => Type switch
     {
-        MessageType.Info => "\xE946",
-        MessageType.Warning => "\xE7BA",
-        MessageType.Error => "\xEA39",
-        _ => "\xE946"
+        MessageType.Warning => "\xF139",
+        _ => "\xF136"
     };
     
     /// <summary>
-    /// The icon color depending on the <see cref="MessageType"/>.
+    /// The inner icon depending on the <see cref="MessageType"/>.
     /// </summary>
-    public Brush? IconColor => Type switch
+    public object IconForeground => Type switch
     {
-        MessageType.Info => Application.Current.Resources["InfoBrush"] as Brush,
-        MessageType.Warning => Application.Current.Resources["WarningBrush"] as Brush,
-        MessageType.Error => Application.Current.Resources["DangerBrush"] as Brush,
-        _ => Application.Current.Resources["InfoBrush"] as Brush
+        MessageType.Info => "\xF13F",
+        MessageType.Warning => "\xF13B",
+        MessageType.Error => "\xF13D",
+        _ => "\xF13F"
+    };
+    
+    /// <summary>
+    /// The icon background color depending on the <see cref="MessageType"/>.
+    /// </summary>
+    public Brush? IconColorBackground => Type switch
+    {
+        MessageType.Info => Resources["AccentBrush"] as Brush,
+        MessageType.Warning => Resources["WarningBrush"] as Brush,
+        MessageType.Error => Resources["DangerBrush"] as Brush,
+        _ => Resources["AccentBrush"] as Brush
+    };
+    
+    /// <summary>
+    /// The icon foreground color depending on the <see cref="MessageType"/>.
+    /// </summary>
+    public Brush? IconColorForeground => Type switch
+    {
+        MessageType.Warning => Resources["BackgroundBaseBrush"] as Brush,
+        _ => Resources["ForegroundBaseBrush"] as Brush
     };
 
     /// <summary>
@@ -195,9 +215,20 @@ public partial class LogViewer
         File.WriteAllText(LogFilePath, "");
     }
 
-    private void ClearOnClick(object sender, RoutedEventArgs e)
+    private async void ClearOnClick(object sender, RoutedEventArgs e)
     {
-        _messageBuffer.Clear();
+        try
+        {
+            if (await MessageBox.Show("LogViewer", "Clear all messages?", 
+                    MessageBoxButton.OKCancel, 
+                    MessageBoxImage.Question) 
+                != MessageBoxResult.OK) return;
+            _messageBuffer.Clear();
+        }
+        catch (Exception ex)
+        {
+            Add(this, ex.Message, MessageType.Error);
+        }
     }
     
     private void ErrorFilterOnClick(object sender, RoutedEventArgs e)

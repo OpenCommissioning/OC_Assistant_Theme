@@ -2,8 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Shell;
+using Microsoft.Win32;
 using OC.Assistant.Theme.Internals;
 
 namespace OC.Assistant.Theme;
@@ -50,6 +50,22 @@ public abstract class Window : System.Windows.Window
         set => SetValue(TitleBarContentProperty, value);
     }
     
+    private static bool IsWindows10()
+    {
+        try
+        {
+            var buildNumber = Registry.GetValue(
+                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
+                "CurrentBuild", null) as string;
+            
+            return int.TryParse(buildNumber, out var build) && build < 22000;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
     /// <inheritdoc />
     protected Window()
     {
@@ -71,25 +87,22 @@ public abstract class Window : System.Windows.Window
         {
             CaptionHeight = titleBarHeight,
             ResizeBorderThickness = new Thickness(5),
-            GlassFrameThickness = new Thickness(1)
+            GlassFrameThickness = IsWindows10() ? 
+                new Thickness(0, 1, 0, 0) : 
+                new Thickness(1, 0, 0, 0)
         });
-        
-        var rootBorder = new Border
-        {
-            BorderThickness = new Thickness(0)
-        };
 
         var rootGrid = new Grid();
-        
-        var blurEffect = new BlurEffect
+
+        var blockingGrid = new Grid
         {
-            Radius = 0
+            VerticalAlignment = VerticalAlignment.Stretch,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Background = background,
+            Visibility = Visibility.Collapsed,
+            Opacity = 0.0
         };
-        
-        var contentBorder = new Border
-        {
-            Effect = blurEffect
-        };
+        WindowChrome.SetIsHitTestVisibleInChrome(blockingGrid, true);
         
         var contentGrid = new Grid
         {
@@ -185,12 +198,6 @@ public abstract class Window : System.Windows.Window
         closeButton.Click += CloseOnClick;
         WindowChrome.SetIsHitTestVisibleInChrome(closeButton, true);
         
-        var modal = new Modal
-        {
-            BlurEffect = blurEffect
-        };
-        WindowChrome.SetIsHitTestVisibleInChrome(modal, true);
-        
         buttonStack.Children.Add(minimizeButton);
         buttonStack.Children.Add(restoreButton);
         buttonStack.Children.Add(maximizeButton);
@@ -202,17 +209,28 @@ public abstract class Window : System.Windows.Window
         titleBarGrid.Children.Add(buttonStack);
         contentGrid.Children.Add(titleBarGrid);
         contentGrid.Children.Add(customContentGrid);
-        contentBorder.Child = contentGrid;
-        rootGrid.Children.Add(contentBorder);
-        rootGrid.Children.Add(modal);
-        rootBorder.Child = rootGrid;
+        rootGrid.Children.Add(contentGrid);
+        rootGrid.Children.Add(blockingGrid);
         
         Initialized += WindowOnInitialized;
         StateChanged += WindowOnStateChanged;
         Application.Current.Activated += ApplicationOnActivated;
         Application.Current.Deactivated += ApplicationOnDeactivated;
         BusyOverlay.StateChanged += BusyOverlayOnStateChanged;
+        MessageBox.Shown += MessageBoxOnShown;
+        MessageBox.Closed += MessageBoxOnHidden;
+        
         return;
+        
+        void MessageBoxOnShown()
+        {
+            blockingGrid.Visibility = Visibility.Visible;
+        }
+        
+        void MessageBoxOnHidden(MessageBoxResult result)
+        {
+            blockingGrid.Visibility = Visibility.Collapsed;
+        }
 
         void WindowOnInitialized(object? sender, EventArgs e)
         {
@@ -234,7 +252,7 @@ public abstract class Window : System.Windows.Window
                 Content = Content
             });
             customContentGrid.Children.Add(new BusyOverlay());
-            Content = rootBorder;
+            Content = rootGrid;
         }
             
         void ApplicationOnActivated(object? sender, EventArgs e)
@@ -261,13 +279,13 @@ public abstract class Window : System.Windows.Window
         {
             if (WindowState == WindowState.Maximized)
             {
-                rootBorder.Margin = new Thickness(8);
+                rootGrid.Margin = new Thickness(8);
                 restoreButton.Visibility = Visibility.Visible;
                 maximizeButton.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            rootBorder.Margin = new Thickness(0);
+            rootGrid.Margin = new Thickness(0);
             restoreButton.Visibility = Visibility.Collapsed;
             maximizeButton.Visibility = Visibility.Visible;
         }

@@ -23,6 +23,7 @@
     <SolidColorBrush x:Key="Accent3Brush" Color="#4C4571F5" />
     <SolidColorBrush x:Key="DarkBrush" Color="#000000" />
     <SolidColorBrush x:Key="Dark1Brush" Color="#66000000" />
+    <SolidColorBrush x:Key="Dark2Brush" Color="#33000000" />
     <SolidColorBrush x:Key="WhiteBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="White1Brush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="White2Brush" Color="#99FFFFFF" />
@@ -36,7 +37,6 @@
     <SolidColorBrush x:Key="LinkBrush" Color="#6090F5" />
     <SolidColorBrush x:Key="SuccessBrush" Color="#32DD32" />
     <SolidColorBrush x:Key="Success1Brush" Color="#D032DD32" />
-    <SolidColorBrush x:Key="InfoBrush" Color="#76A6ED" />
     <SolidColorBrush x:Key="WarningBrush" Color="#EEC63F" />
     <SolidColorBrush x:Key="DangerBrush" Color="#BE4846" />
     

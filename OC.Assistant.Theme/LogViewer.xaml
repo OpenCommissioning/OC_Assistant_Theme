@@ -32,14 +32,20 @@
                     <ColumnDefinition Width="40"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0"
-                       Content="{Binding Icon}"
-                       Foreground="{Binding IconColor}"
-                       FontSize="20"
-                       FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                       HorizontalContentAlignment="Center"
-                       VerticalContentAlignment="Center">
-                </Label>
+                <Grid Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                    <TextBlock 
+                        FontSize="20"
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                        Text="{Binding IconBackground}"
+                        Foreground="{Binding IconColorBackground}"/>
+                    <TextBlock 
+                        FontSize="20"
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                        Text="{Binding IconForeground}"
+                        Foreground="{Binding IconColorForeground}"/>
+                </Grid>
                 <VirtualizingStackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Header}"
                                FontSize="12"
@@ -60,42 +66,82 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="27"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button  Width="40"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     Click="ClearOnClick"
-                     Margin="1 0 1 0">
+            <Button 
+                Click="ClearOnClick"
+                Width="30"
+                VerticalAlignment="Stretch"
+                Padding="0"
+                Margin="3">
                 <TextBlock FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="14">&#xE74D;</TextBlock>
             </Button>
+            <Border Background="{DynamicResource White4Brush}" Width="1" Margin="3 4"></Border>
             <ToggleButton
-                    Width="40"
-                    Foreground="{DynamicResource InfoBrush}"
-                    Click="InfoFilterOnClick"
-                    IsChecked="True"
-                    Margin="1 0 1 0">
-                <TextBlock FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="14">&#xE946;</TextBlock>
+                Click="InfoFilterOnClick"
+                IsChecked="True"
+                Width="30"
+                VerticalAlignment="Stretch"
+                Padding="0 0 0 2"
+                Margin="3 3 0 3">
+                <Grid>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource AccentBrush}"
+                        FontSize="16" 
+                        Text="&#xF136;"/>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource ForegroundBaseBrush}"
+                        FontSize="16" 
+                        Text="&#xF13F;"/>
+                </Grid>
             </ToggleButton>
             <ToggleButton
-                          Width="40"
-                          Foreground="{DynamicResource WarningBrush}"
-                          Click="WarningFilterOnClick"
-                          IsChecked="True"
-                          Margin="1 0 1 0">
-                <TextBlock FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="14">&#xE7BA;</TextBlock>
+                Click="WarningFilterOnClick"
+                IsChecked="True"
+                Width="30"
+                VerticalAlignment="Stretch"
+                Padding="0 0 0 2"
+                Margin="3 3 0 3">
+                <Grid>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource WarningBrush}"
+                        FontSize="16" 
+                        Text="&#xF139;"/>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource BackgroundBaseBrush}"
+                        FontSize="16" 
+                        Text="&#xF13B;"/>
+                </Grid>
             </ToggleButton>
             <ToggleButton
-                          Width="40"
-                          Foreground="{DynamicResource DangerBrush}"
-                          Click="ErrorFilterOnClick"
-                          IsChecked="True"
-                          Margin="1 0 1 0">
-                <TextBlock FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="14">&#xEA39;</TextBlock>
+                Click="ErrorFilterOnClick"
+                IsChecked="True"
+                Width="30"
+                VerticalAlignment="Stretch"
+                Padding="0 0 0 2"
+                Margin="3 3 0 3">
+                <Grid>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource DangerBrush}"
+                        FontSize="16" 
+                        Text="&#xF136;"/>
+                    <TextBlock 
+                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
+                        Foreground="{DynamicResource ForegroundBaseBrush}"
+                        FontSize="16" 
+                        Text="&#xF13D;"/>
+                </Grid>
             </ToggleButton>
         </StackPanel>
-        <ItemsControl Grid.Row="1" Style="{StaticResource LogViewerStyle}" x:Name="ItemsControl" />
+        <Grid Grid.Row="1" Background="{DynamicResource Dark2Brush}" >
+            <ItemsControl Style="{StaticResource LogViewerStyle}" x:Name="ItemsControl" />
+        </Grid>
     </Grid>
 </UserControl>

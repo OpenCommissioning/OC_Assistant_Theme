@@ -60,10 +60,11 @@
     <!-- TitleBar button close -->
     <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
         <Setter Property="Content" Value="&#xE106;"/>
+        <Setter Property="Width" Value="44"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" VerticalAlignment="Stretch">
+                    <Grid x:Name="LayoutRoot" Background="Transparent" Width="{TemplateBinding Width}" VerticalAlignment="Stretch">
                         <TextBlock x:Name="Text" 
                                    Text="{TemplateBinding Content}" 
                                    FontFamily="{DynamicResource SymbolThemeFontFamily}" 
