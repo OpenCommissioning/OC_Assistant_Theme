@@ -1,4 +1,4 @@
-﻿<theme:Window x:Class="ThemeTest.MainWindow"
+﻿<theme:Window x:Class="Showcase.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,7 +28,7 @@
                     FontSize="14"
                     ToolTip="ToolTip"
                     Content="&#xE712;" 
-                    Click="ShowModalOnClick"/>
+                    Click="ShowSettingsOnClick"/>
                 <Border Width="1" Background="{DynamicResource White4Brush}" Margin="6 8 0 8"/>
             </StackPanel>
         </Grid>
@@ -40,8 +40,8 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" VerticalAlignment="Top">
             <Label Margin="10">Label</Label>
-            <Button Margin="10" Background="{DynamicResource White6Brush}" Click="ButtonMessageBoxOnClick">Show MessageBox</Button>
-            <Button Margin="10" Background="{DynamicResource White6Brush}" Click="ButtonBusyOverlayOnClick">Show BusyOverlay</Button>
+            <Button Margin="10" Style="{DynamicResource ButtonPrimary}" Click="ButtonMessageBoxOnClick">Show MessageBox</Button>
+            <Button Margin="10" Style="{DynamicResource ButtonSecondary}" Click="ButtonBusyOverlayOnClick">Show BusyOverlay</Button>
             <Button Margin="10" Style="{DynamicResource LinkButton}" Click="LinkButtonOnClick">github link</Button>
             <ToggleButton Margin="10">ToggleButton</ToggleButton>
             <CheckBox Margin="10">CheckBox</CheckBox>

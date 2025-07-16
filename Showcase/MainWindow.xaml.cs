@@ -1,7 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using OC.Assistant.Theme;
 
-namespace ThemeTest;
+namespace Showcase;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -12,13 +13,32 @@ public partial class MainWindow
     {
         InitializeComponent();
         LogViewer.Add(this, "Application has started", MessageType.Info);
+        LogViewer.Add(this, "Application has started", MessageType.Warning);
+        LogViewer.Add(this, "Application has started", MessageType.Error);
     }
 
-    private async void ShowModalOnClick(object sender, RoutedEventArgs e)
+    private async void ShowSettingsOnClick(object sender, RoutedEventArgs e)
     {
         try
         {
-            await Modal.Show("Modal", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            var settings = new StackPanel
+            {
+                Children =
+                {
+                    new TextBox
+                    {
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Text = "Value 1",
+                    },
+                    new TextBox
+                    {
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Text = "Value 2",
+                    }
+                }
+            };
+            await OC.Assistant.Theme.MessageBox
+                .Show("Settings", settings, MessageBoxButton.OKCancel, MessageBoxImage.None);
         }
         catch (Exception ex)
         {
@@ -26,17 +46,29 @@ public partial class MainWindow
         }
     }
 
-    private void ButtonMessageBoxOnClick(object sender, RoutedEventArgs e)
+    private async void ButtonMessageBoxOnClick(object sender, RoutedEventArgs e)
     {
-        if (OC.Assistant.Theme.MessageBox
-            .Show("MessageBox", "OK or Cancel?", MessageBoxButton.OKCancel, MessageBoxImage.Question)
-            == MessageBoxResult.OK)
+        try
         {
-            LogViewer.Add(this, "Clicked OK", MessageType.Info);
-            return;
-        }
+            if (await OC.Assistant.Theme.MessageBox
+                    .Show("MessageBox", "OK to continue", MessageBoxButton.OKCancel, MessageBoxImage.Information)
+                != MessageBoxResult.OK) return;
         
-        LogViewer.Add(this, "Clicked Cancel", MessageType.Warning);
+            if (await OC.Assistant.Theme.MessageBox
+                    .Show("MessageBox", "Yes to continue", MessageBoxButton.YesNoCancel, MessageBoxImage.Question)
+                != MessageBoxResult.Yes) return;
+        
+            if (await OC.Assistant.Theme.MessageBox
+                    .Show("MessageBox", "Yes to continue", MessageBoxButton.YesNo, MessageBoxImage.Warning)
+                != MessageBoxResult.Yes) return;
+        
+            await OC.Assistant.Theme.MessageBox
+                .Show("MessageBox", "OK", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (Exception ex)
+        {
+            LogViewer.Add(this, ex.Message, MessageType.Error);
+        }
     }
 
     private async void ButtonBusyOverlayOnClick(object sender, RoutedEventArgs e)
