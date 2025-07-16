@@ -4,7 +4,8 @@
         FontFamily="{DynamicResource ThemeFontFamily}"
         FontSize="{DynamicResource ThemeFontSize}"
         Background="{DynamicResource BackgroundOverlayBrush}"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
     <WindowChrome.WindowChrome>
         <WindowChrome 
             ResizeBorderThickness="0" 
