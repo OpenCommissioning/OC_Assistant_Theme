@@ -7,14 +7,12 @@
         <Setter Property="Background" Value="{DynamicResource TransparentBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
-        <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
@@ -25,37 +23,36 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{DynamicResource ControlCornerRadius}"
                         SnapsToDevicePixels="True">
-                        <Grid VerticalAlignment="Center" Margin="{TemplateBinding Margin}">
+                        <Grid VerticalAlignment="Center" Margin="{TemplateBinding Margin}" Height="18">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="18" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Grid VerticalAlignment="Top" >
+                            <Grid Grid.Column="0">
                                 <Rectangle
                                     x:Name="NormalRectangle"
-                                    Fill="{DynamicResource TransparentBrush}"
                                     Stroke="{DynamicResource White2Brush}"
                                     StrokeThickness="1"
                                     UseLayoutRounding="False"
-                                    Height="20"
-                                    Width="20"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
                                     RadiusX="{DynamicResource CornerRadiusValue}"
                                     RadiusY="{DynamicResource CornerRadiusValue}"/>
                                 <ContentControl
                                     x:Name="CheckGlyph"
                                     Foreground="{DynamicResource WhiteBrush}"
-                                    FontSize="16"
+                                    FontSize="14"
                                     Opacity="0"
                                     Margin="-1 -2 1 2"
                                     Template="{DynamicResource IconTemplate}"
                                     Content="{DynamicResource IconCheckMark}"/>
                             </Grid>
                             <ContentPresenter
+                                Grid.Column="1"
                                 x:Name="ContentPresenter"
                                 Margin="6 0 0 0"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Grid.Column="1"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
