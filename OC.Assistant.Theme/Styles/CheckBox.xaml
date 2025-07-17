@@ -63,27 +63,11 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
-                                <Condition Property="IsMouseOver" Value="False" />
                                 <Condition Property="IsPressed" Value="False" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource White2Brush}" />
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
-                        </MultiTrigger>
-                        <!-- UncheckedPointerOver -->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="False" />
-                                <Condition Property="IsMouseOver" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource White1Brush}" />
-                            <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
                         </MultiTrigger>
                         <!-- UncheckedPressed -->
                         <MultiTrigger>
@@ -91,11 +75,7 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource ForegroundBaseBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource White3Brush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
+                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource AccentBrush}" />
                         </MultiTrigger>
                         <!-- UncheckedDisabled -->
                         <MultiTrigger>
@@ -103,39 +83,20 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource White4Brush}" />
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
                         </MultiTrigger>
                         <!-- CheckedNormal -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True" />
-                                <Condition Property="IsMouseOver" Value="False" />
                                 <Condition Property="IsPressed" Value="False" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource TransparentBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
                             <Setter TargetName="NormalRectangle" Property="StrokeThickness" Value="0" />
-                            <Setter TargetName="CheckGlyph" Property="Opacity" Value="1" />
-                        </MultiTrigger>
-                        <!-- CheckedPointerOver -->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="True" />
-                                <Condition Property="IsMouseOver" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1" />
                         </MultiTrigger>
                         <!-- CheckedPressed -->
@@ -144,11 +105,8 @@
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource AccentBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource WhiteBrush}" />
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1" />
                         </MultiTrigger>
                         <!-- CheckedDisabled -->
@@ -157,11 +115,10 @@
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="RootGrid" Property="Background" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="RootGrid" Property="BorderBrush" Value="{DynamicResource TransparentBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource TransparentBrush}" />
-                            <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource White5Brush}" />
-                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource White4Brush}" />
+                            <Setter TargetName="CheckGlyph" Property="Foreground" Value="{DynamicResource White2Brush}" />
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

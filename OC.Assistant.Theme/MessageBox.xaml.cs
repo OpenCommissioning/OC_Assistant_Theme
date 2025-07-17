@@ -9,8 +9,6 @@ namespace OC.Assistant.Theme;
 /// </summary>
 public partial class MessageBox
 {
-    private static MessageBox? _messageBox; 
-    
     private MessageBox()
     {
         InitializeComponent();
@@ -36,6 +34,12 @@ public partial class MessageBox
     /// The event provides a <see cref="MessageBoxResult"/> indicating the user's action or decision.
     /// </summary>
     public new static event Action<MessageBoxResult>? Closed;
+    
+    /// <summary>
+    /// Indicates whether the message box is currently open or not.
+    /// </summary>
+    /// <returns>True if the message box is open, otherwise false.</returns>
+    public static bool IsOpen { get; private set; }
     
     /// <summary>
     /// Shows the message box with the given parameters. 
@@ -75,8 +79,7 @@ public partial class MessageBox
     {
         var mainWindow = Application.Current.MainWindow;
         if (mainWindow is null || messageBox.Content is not FrameworkElement content) {return MessageBoxResult.None;}
-        _messageBox = messageBox;
-        mainWindow.Activated += MainWindowOnActivated;
+        messageBox.Owner = mainWindow;
         
         content.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
         messageBox.WindowStartupLocation = WindowStartupLocation.Manual;
@@ -84,17 +87,13 @@ public partial class MessageBox
         messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
         messageBox.Height = content.DesiredSize.Height + 2;
         messageBox.Width = content.DesiredSize.Width + 2;
+        IsOpen = true;
         messageBox.Show();
         Shown?.Invoke();
-        return await WaitForClosed(mainWindow);
+        return await WaitForClosed();
     }
     
-    private static void MainWindowOnActivated(object? sender, EventArgs e)
-    {
-        _messageBox?.Activate();
-    }
-    
-    private static async Task<MessageBoxResult> WaitForClosed(System.Windows.Window mainWindow)
+    private static async Task<MessageBoxResult> WaitForClosed()
     {
         var tcs = new TaskCompletionSource<MessageBoxResult>();
         Closed += OnClosed;
@@ -103,7 +102,6 @@ public partial class MessageBox
         void OnClosed(MessageBoxResult result)
         {
             Closed -= OnClosed;
-            mainWindow.Activated -= MainWindowOnActivated;
             tcs.SetResult(result);
         }
     }
@@ -167,6 +165,7 @@ public partial class MessageBox
         else if (sender.Equals(ButtonNo)) result = MessageBoxResult.No;
         else if (sender.Equals(ButtonCancel)) result = MessageBoxResult.Cancel;
         
+        IsOpen = false;
         Closed?.Invoke(result);
         Close();
     }

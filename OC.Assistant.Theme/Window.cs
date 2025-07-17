@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shell;
 using Microsoft.Win32;
@@ -66,6 +67,22 @@ public abstract class Window : System.Windows.Window
     protected Window()
     {
         InitializeComponent();
+        Loaded += MainWindowOnLoaded;
+    }
+    
+    private void MainWindowOnLoaded(object sender, RoutedEventArgs e)
+    {
+        var source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+        source?.AddHook(WndProc);
+    }
+    
+    private const int WM_SYS_COMMAND = 0x112;
+
+    private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg != WM_SYS_COMMAND) return IntPtr.Zero;
+        handled = MessageBox.IsOpen;
+        return IntPtr.Zero;
     }
 
     private void InitializeComponent()
@@ -94,9 +111,8 @@ public abstract class Window : System.Windows.Window
         {
             VerticalAlignment = VerticalAlignment.Stretch,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Background = background,
-            Visibility = Visibility.Collapsed,
-            Opacity = 0.0
+            Background = Brushes.Transparent,
+            Visibility = Visibility.Collapsed
         };
         WindowChrome.SetIsHitTestVisibleInChrome(blockingGrid, true);
         
@@ -215,17 +231,19 @@ public abstract class Window : System.Windows.Window
         BusyOverlay.StateChanged += BusyOverlayOnStateChanged;
         MessageBox.Shown += MessageBoxOnShown;
         MessageBox.Closed += MessageBoxOnHidden;
-        
         return;
         
         void MessageBoxOnShown()
         {
             blockingGrid.Visibility = Visibility.Visible;
+            ApplicationOnDeactivated(null, EventArgs.Empty);
         }
         
         void MessageBoxOnHidden(MessageBoxResult result)
         {
             blockingGrid.Visibility = Visibility.Collapsed;
+            ApplicationOnActivated(null, EventArgs.Empty);
+            Activate();
         }
 
         void WindowOnInitialized(object? sender, EventArgs e)
@@ -253,6 +271,7 @@ public abstract class Window : System.Windows.Window
             
         void ApplicationOnActivated(object? sender, EventArgs e)
         {
+            if (blockingGrid.Visibility == Visibility.Visible) return;
             minimizeButton.Foreground = foreground;
             maximizeButton.Foreground = foreground;
             restoreButton.Foreground = foreground;
