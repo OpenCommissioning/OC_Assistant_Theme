@@ -67,7 +67,7 @@ public partial class BusyOverlay
             Grid.Height = value;
             Grid.Width = value;
             Grid.Margin = new Thickness(value, value, 0, 0);
-            Label.Margin = new Thickness(-value / 4, -value / 4, 0, 0);
+            Label.Margin = new Thickness(-value, -value, 0, 0);
             Label.FontSize = value / 2;
         }
     }

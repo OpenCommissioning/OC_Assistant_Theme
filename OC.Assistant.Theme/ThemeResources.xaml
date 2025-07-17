@@ -7,9 +7,8 @@
     <CornerRadius x:Key="ControlCornerRadius">3</CornerRadius>
     <system:Double x:Key="CornerRadiusValue">3</system:Double>
     
-    <!-- Fonts -->
+    <!-- Font -->
     <FontFamily x:Key="ThemeFontFamily">Segoe UI</FontFamily>
-    <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
     <system:Double x:Key="ThemeFontSize">12</system:Double>
     
     <!-- TitleBar -->
@@ -46,6 +45,7 @@
         <ResourceDictionary Source="Styles/SelectButton.xaml" />
         <ResourceDictionary Source="Styles/LinkButton.xaml" />
         <ResourceDictionary Source="Styles/CheckBox.xaml" />
+        <ResourceDictionary Source="Styles/Icons.xaml" />
         <ResourceDictionary Source="Styles/ComboBox.xaml" />
         <ResourceDictionary Source="Styles/Label.xaml" />
         <ResourceDictionary Source="Styles/Menu.xaml" />

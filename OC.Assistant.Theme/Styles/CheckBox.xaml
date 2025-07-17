@@ -41,14 +41,14 @@
                                     Width="20"
                                     RadiusX="{DynamicResource CornerRadiusValue}"
                                     RadiusY="{DynamicResource CornerRadiusValue}"/>
-                                <Label
-                                    Content="&#xE73E;"
+                                <ContentControl
                                     x:Name="CheckGlyph"
-                                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                                    FontSize="16"
-                                    Margin="2 2 0 0"
                                     Foreground="{DynamicResource WhiteBrush}"
-                                    Opacity="0" />
+                                    FontSize="16"
+                                    Opacity="0"
+                                    Margin="-1 -2 1 2"
+                                    Template="{DynamicResource IconTemplate}"
+                                    Content="{DynamicResource IconCheckMark}"/>
                             </Grid>
                             <ContentPresenter
                                 x:Name="ContentPresenter"

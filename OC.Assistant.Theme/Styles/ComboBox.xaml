@@ -319,21 +319,21 @@
                             Visibility="Collapsed"
                             Width="30"
                             HorizontalAlignment="Right" />
-                        <Label
+                        <ContentControl
                             x:Name="DropDownGlyph"
                             MinHeight="24"
                             Grid.Row="1"
                             Grid.Column="1"
                             IsHitTestVisible="False"
-                            Margin="0,0,10,0"
+                            Margin="0,-2,10,2"
                             Foreground="{DynamicResource White1Brush}"
-                            FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                            Template="{DynamicResource IconTemplate}"
+                            Content="{DynamicResource IconChevronDown}"
                             FontSize="12"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center">
-                            &#xE70D;
-                        </Label>
+                        </ContentControl>
                         <ContentPresenter
                             x:Name="DescriptionPresenter"
                             Grid.Row="2"

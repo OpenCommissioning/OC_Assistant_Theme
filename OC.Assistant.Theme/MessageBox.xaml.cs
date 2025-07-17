@@ -4,17 +4,25 @@ using System.Windows.Input;
 
 namespace OC.Assistant.Theme;
 
-
 /// <summary>
 /// Represents a custom message box with an appropriate theme style.
 /// </summary>
 public partial class MessageBox
 {
-    private static MessageBox? _messageBox;
+    private static MessageBox? _messageBox; 
     
     private MessageBox()
     {
         InitializeComponent();
+    }
+
+    /// <inheritdoc />
+    /// <remarks>This override sets the <see cref="System.Windows.Shell.WindowChrome.GlassFrameThickness"/>
+    /// after rendering to avoid white flickering.</remarks>
+    protected override void OnContentRendered(EventArgs e)
+    {
+        base.OnContentRendered(e);
+        WindowChrome.GlassFrameThickness = new Thickness(1, 0, 0, 0);
     }
 
     /// <summary>
@@ -52,41 +60,41 @@ public partial class MessageBox
     /// <returns></returns>
     public static async Task<MessageBoxResult> Show(string caption, UIElement content, MessageBoxButton button, MessageBoxImage image)
     {
-        _messageBox = new MessageBox
+        var messageBox = new MessageBox
         {
             TitleLabel = { Text = caption },
-            Title = caption
+            Title = caption,
         };
-        _messageBox.ContentGrid.Children.Add(content);
-        SetButtons(_messageBox, button);
-        SetImage(_messageBox, image);
-        return await SetPositionAndShow();
+        messageBox.ContentGrid.Children.Add(content);
+        SetButtons(messageBox, button);
+        SetImage(messageBox, image);
+        return await SetPositionAndShow(messageBox);
     }
     
-    private static async Task<MessageBoxResult> SetPositionAndShow()
+    private static async Task<MessageBoxResult> SetPositionAndShow(MessageBox messageBox)
     {
-        var result = MessageBoxResult.None;
         var mainWindow = Application.Current.MainWindow;
-        if (mainWindow is null || _messageBox?.Content is not FrameworkElement content) return result;
-
+        if (mainWindow is null || messageBox.Content is not FrameworkElement content) {return MessageBoxResult.None;}
+        _messageBox = messageBox;
         mainWindow.Activated += MainWindowOnActivated;
         
         content.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-        _messageBox.WindowStartupLocation = WindowStartupLocation.Manual;
-        _messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - content.DesiredSize.Height / 2;
-        _messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
-        _messageBox.Height = content.DesiredSize.Height + 2;
-        _messageBox.Width = content.DesiredSize.Width + 2;
-        _messageBox.Show();
-        
+        messageBox.WindowStartupLocation = WindowStartupLocation.Manual;
+        messageBox.Top = mainWindow.Top + mainWindow.Height / 2 - content.DesiredSize.Height / 2;
+        messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
+        messageBox.Height = content.DesiredSize.Height + 2;
+        messageBox.Width = content.DesiredSize.Width + 2;
+        messageBox.Show();
         Shown?.Invoke();
-        
-        result = await WaitForClosed();
-        mainWindow.Activated -= MainWindowOnActivated;
-        return result;
+        return await WaitForClosed(mainWindow);
     }
     
-    private static async Task<MessageBoxResult> WaitForClosed()
+    private static void MainWindowOnActivated(object? sender, EventArgs e)
+    {
+        _messageBox?.Activate();
+    }
+    
+    private static async Task<MessageBoxResult> WaitForClosed(System.Windows.Window mainWindow)
     {
         var tcs = new TaskCompletionSource<MessageBoxResult>();
         Closed += OnClosed;
@@ -95,13 +103,9 @@ public partial class MessageBox
         void OnClosed(MessageBoxResult result)
         {
             Closed -= OnClosed;
+            mainWindow.Activated -= MainWindowOnActivated;
             tcs.SetResult(result);
         }
-    }
-
-    private static void MainWindowOnActivated(object? sender, EventArgs e)
-    {
-        _messageBox?.Activate();
     }
 
     private static void SetButtons(MessageBox messageBox, MessageBoxButton button)
@@ -134,17 +138,25 @@ public partial class MessageBox
 
     private static void SetImage(MessageBox messageBox, MessageBoxImage image)
     {
-        messageBox.SymbolInformation.Visibility =
-            image == MessageBoxImage.Information ? Visibility.Visible : Visibility.Collapsed;
-        
-        messageBox.SymbolWarning.Visibility =
-            image == MessageBoxImage.Warning ? Visibility.Visible : Visibility.Collapsed;
-        
-        messageBox.SymbolError.Visibility =
-            image == MessageBoxImage.Error ? Visibility.Visible : Visibility.Collapsed;
-        
-        messageBox.SymbolQuestion.Visibility =
-            image == MessageBoxImage.Question ? Visibility.Visible : Visibility.Collapsed;
+        switch (image)
+        {
+            case MessageBoxImage.Question:
+                messageBox.IconControl.Template = Application.Current.Resources["QuestionIcon"] as ControlTemplate;
+                break;
+            case MessageBoxImage.Information:
+                messageBox.IconControl.Template = Application.Current.Resources["InformationIcon"] as ControlTemplate;
+                break;
+            case MessageBoxImage.Warning:
+                messageBox.IconControl.Template = Application.Current.Resources["WarningIcon"] as ControlTemplate;
+                break;
+            case MessageBoxImage.Error:
+                messageBox.IconControl.Template = Application.Current.Resources["ErrorIcon"] as ControlTemplate;
+                break;
+            case MessageBoxImage.None:
+            default:
+                messageBox.IconControl.Visibility = Visibility.Collapsed;
+                break;
+        }
     }
 
     private void ButtonOnClick(object sender, RoutedEventArgs e)
@@ -156,8 +168,7 @@ public partial class MessageBox
         else if (sender.Equals(ButtonCancel)) result = MessageBoxResult.Cancel;
         
         Closed?.Invoke(result);
-        _messageBox?.Close();
-        _messageBox = null;
+        Close();
     }
 
     private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

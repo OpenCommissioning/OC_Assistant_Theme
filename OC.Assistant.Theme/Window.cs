@@ -10,12 +10,8 @@ namespace OC.Assistant.Theme;
 
 /// <inheritdoc />
 /// <remarks>
-/// Implements a custom TitleBar, a <see cref="Modal"/> and a <see cref="BusyOverlay"/>.<br/><br/>
+/// Implements a custom TitleBar and a <see cref="BusyOverlay"/>.<br/><br/>
 /// Content inside the TitleBar can be rendered by setting the <see cref="TitleBarContent"/>.<br/><br/>
-/// To show the <see cref="Modal"/>, call
-/// <see cref="Modal.Show(string, UIElement, MessageBoxButton, MessageBoxImage)"/> or
-/// <see cref="Modal.Show(string, string, MessageBoxButton, MessageBoxImage)"/>
-/// anywhere in your application.<br/><br/>
 /// To activate/deactivate the <see cref="BusyOverlay"/>, call<br/>
 /// <see cref="BusyOverlay.SetState(bool)"/> anywhere in your application. 
 /// </remarks>

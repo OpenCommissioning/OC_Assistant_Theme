@@ -43,16 +43,15 @@
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Background="Transparent"
                                             CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}">
-                                            <Label
+                                            <ContentControl
                                                 x:Name="GlyphElement"
                                                 Foreground="{DynamicResource White1Brush}"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
-                                                FontStyle="Normal"
-                                                FontSize="10"
-                                                FontFamily="{DynamicResource SymbolThemeFontFamily}">
-                                                &#xE106;
-                                            </Label>
+                                                Template="{DynamicResource IconTemplate}"
+                                                Content="{DynamicResource IconChromeClose}"
+                                                FontSize="10">
+                                            </ContentControl>
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="true">

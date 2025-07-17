@@ -15,26 +15,22 @@
     
     <!-- TitleBar buttons base style -->
     <Style x:Key="CaptionButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="44"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" VerticalAlignment="Stretch">
-                        <TextBlock x:Name="Text" 
-                                   Text="{TemplateBinding Content}" 
-                                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                                   FontSize="9" 
-                                   Foreground="{TemplateBinding Foreground}" 
-                                   HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center"
-                                   RenderOptions.ClearTypeHint="Auto" 
-                                   TextOptions.TextRenderingMode="Aliased" 
-                                   TextOptions.TextFormattingMode="Display"/>
+                    <Grid x:Name="LayoutRoot" Background="Transparent" Width="{TemplateBinding Width}" VerticalAlignment="Stretch">
+                        <ContentControl 
+                            Template="{DynamicResource IconTemplate}"
+                            Foreground="{DynamicResource ForegroundBaseBrush}"
+                            Content="{TemplateBinding Content}"
+                            Margin="{TemplateBinding Padding}"
+                            FontSize="10"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource White5Brush}"/>
-                            <Setter TargetName="Text" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -44,51 +40,43 @@
 
     <!-- TitleBar button minimize -->
     <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-        <Setter Property="Content" Value="&#xE949;"/>
+        <Setter Property="Padding" Value="0 -2 0 2"></Setter>
+        <Setter Property="Content" Value="{DynamicResource IconChromeMinimize}"/>
     </Style>
 
     <!-- TitleBar button maximize -->
     <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-        <Setter Property="Content" Value="&#xE739;"/>
+        <Setter Property="Content" Value="{DynamicResource IconChromeMaximize}"/>
     </Style>
 
     <!-- TitleBar button restore -->
     <Style x:Key="RestoreButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-        <Setter Property="Content" Value="&#xE923;"/>
+        <Setter Property="Content" Value="{DynamicResource IconChromeRestore}"/>
     </Style>
 
     <!-- TitleBar button close -->
     <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-        <Setter Property="Content" Value="&#xE106;"/>
-        <Setter Property="Width" Value="44"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="LayoutRoot" Background="Transparent" Width="{TemplateBinding Width}" VerticalAlignment="Stretch">
-                        <TextBlock x:Name="Text" 
-                                   Text="{TemplateBinding Content}" 
-                                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                                   FontSize="9" 
-                                   Foreground="{TemplateBinding Foreground}" 
-                                   HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center"
-                                   RenderOptions.ClearTypeHint="Auto" 
-                                   TextOptions.TextRenderingMode="Aliased" 
-                                   TextOptions.TextFormattingMode="Display"/>
+                        <ContentControl 
+                            Template="{DynamicResource IconTemplate}"
+                            Foreground="{DynamicResource ForegroundBaseBrush}"
+                            Content="{DynamicResource IconChromeClose}"
+                            FontSize="10"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="#E81123"/>
-                            <Setter TargetName="Text" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="#C50F1F"/>
-                            <Setter TargetName="Text" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
+    
 </ResourceDictionary>

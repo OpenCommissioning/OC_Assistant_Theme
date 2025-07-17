@@ -32,20 +32,12 @@
                     <ColumnDefinition Width="40"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
-                    <TextBlock 
-                        FontSize="20"
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                        Text="{Binding IconBackground}"
-                        Foreground="{Binding IconColorBackground}"/>
-                    <TextBlock 
-                        FontSize="20"
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                        Text="{Binding IconForeground}"
-                        Foreground="{Binding IconColorForeground}"/>
-                </Grid>
+                <ContentControl 
+                    Grid.Column="0" 
+                    FontSize="20" 
+                    Template="{Binding IconTemplate}" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
                 <VirtualizingStackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Header}"
                                FontSize="12"
@@ -74,9 +66,13 @@
                 Click="ClearOnClick"
                 Width="30"
                 VerticalAlignment="Stretch"
-                Padding="0"
-                Margin="3">
-                <TextBlock FontFamily="{DynamicResource SymbolThemeFontFamily}" FontSize="14">&#xE74D;</TextBlock>
+                Padding="0 0 2 0"
+                Margin="5 3 3 3">
+                <ContentControl 
+                    Template="{DynamicResource IconTemplate}"
+                    FontSize="14"
+                    Foreground="{DynamicResource ForegroundBaseBrush}"
+                    Content="{DynamicResource IconDelete}"/>
             </Button>
             <Border Background="{DynamicResource White4Brush}" Width="1" Margin="3 4"></Border>
             <ToggleButton
@@ -86,18 +82,7 @@
                 VerticalAlignment="Stretch"
                 Padding="0 0 0 2"
                 Margin="3 3 0 3">
-                <Grid>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource AccentBrush}"
-                        FontSize="16" 
-                        Text="&#xF136;"/>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource ForegroundBaseBrush}"
-                        FontSize="16" 
-                        Text="&#xF13F;"/>
-                </Grid>
+                <ContentControl FontSize="16" Template="{DynamicResource InformationIcon}" />
             </ToggleButton>
             <ToggleButton
                 Click="WarningFilterOnClick"
@@ -106,18 +91,7 @@
                 VerticalAlignment="Stretch"
                 Padding="0 0 0 2"
                 Margin="3 3 0 3">
-                <Grid>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource WarningBrush}"
-                        FontSize="16" 
-                        Text="&#xF139;"/>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource BackgroundBaseBrush}"
-                        FontSize="16" 
-                        Text="&#xF13B;"/>
-                </Grid>
+                <ContentControl FontSize="16" Template="{DynamicResource WarningIcon}" />
             </ToggleButton>
             <ToggleButton
                 Click="ErrorFilterOnClick"
@@ -126,18 +100,7 @@
                 VerticalAlignment="Stretch"
                 Padding="0 0 0 2"
                 Margin="3 3 0 3">
-                <Grid>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource DangerBrush}"
-                        FontSize="16" 
-                        Text="&#xF136;"/>
-                    <TextBlock 
-                        FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                        Foreground="{DynamicResource ForegroundBaseBrush}"
-                        FontSize="16" 
-                        Text="&#xF13D;"/>
-                </Grid>
+                <ContentControl FontSize="16" Template="{DynamicResource ErrorIcon}" />
             </ToggleButton>
         </StackPanel>
         <Grid Grid.Row="1" Background="{DynamicResource Dark2Brush}" >

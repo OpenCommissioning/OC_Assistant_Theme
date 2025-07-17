@@ -38,7 +38,9 @@ public enum MessageType
 /// <param name="type">The message type.</param>
 internal class Message(object sender, string message, MessageType type)
 {
-    private static System.Windows.ResourceDictionary Resources { get; } = Application.Current.Resources;
+    private static readonly ControlTemplate? InfoIconTemplate = Application.Current.Resources["InformationIcon"] as ControlTemplate;
+    private static readonly ControlTemplate? WarningIconTemplate = Application.Current.Resources["WarningIcon"] as ControlTemplate;
+    private static readonly ControlTemplate? ErrorIconTemplate = Application.Current.Resources["ErrorIcon"] as ControlTemplate;
     
     /// <summary>
     /// Gets a <see cref="DateTime"/> value that represents the time of creation of this instance.
@@ -60,44 +62,12 @@ internal class Message(object sender, string message, MessageType type)
     /// </summary>
     public string Text => message;
 
-    /// <summary>
-    /// The outer icon depending on the <see cref="MessageType"/>.
-    /// </summary>
-    public object IconBackground => Type switch
+    public ControlTemplate? IconTemplate => Type switch
     {
-        MessageType.Warning => "\xF139",
-        _ => "\xF136"
-    };
-    
-    /// <summary>
-    /// The inner icon depending on the <see cref="MessageType"/>.
-    /// </summary>
-    public object IconForeground => Type switch
-    {
-        MessageType.Info => "\xF13F",
-        MessageType.Warning => "\xF13B",
-        MessageType.Error => "\xF13D",
-        _ => "\xF13F"
-    };
-    
-    /// <summary>
-    /// The icon background color depending on the <see cref="MessageType"/>.
-    /// </summary>
-    public Brush? IconColorBackground => Type switch
-    {
-        MessageType.Info => Resources["AccentBrush"] as Brush,
-        MessageType.Warning => Resources["WarningBrush"] as Brush,
-        MessageType.Error => Resources["DangerBrush"] as Brush,
-        _ => Resources["AccentBrush"] as Brush
-    };
-    
-    /// <summary>
-    /// The icon foreground color depending on the <see cref="MessageType"/>.
-    /// </summary>
-    public Brush? IconColorForeground => Type switch
-    {
-        MessageType.Warning => Resources["BackgroundBaseBrush"] as Brush,
-        _ => Resources["ForegroundBaseBrush"] as Brush
+        MessageType.Info => InfoIconTemplate,
+        MessageType.Warning => WarningIconTemplate,
+        MessageType.Error => ErrorIconTemplate,
+        _ => null
     };
 
     /// <summary>

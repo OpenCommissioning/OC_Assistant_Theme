@@ -5,11 +5,11 @@
     <Grid>
         <Grid Background="{DynamicResource BackgroundBaseBrush}" Opacity="0.3"></Grid>
         <Grid x:Name="Grid">
-            <Label x:Name="Label"
-                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                   Foreground="{DynamicResource White3Brush}">
-                
-            </Label>
+            <ContentControl 
+                x:Name="Label"
+                Foreground="{DynamicResource White3Brush}"
+                Template="{DynamicResource IconTemplate}"
+                Content="{DynamicResource IconSetting}"/>
         </Grid>
     </Grid>
 </Grid>
