@@ -22,8 +22,9 @@
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="LayoutRoot" Background="Transparent" Width="{TemplateBinding Width}" VerticalAlignment="Stretch">
                         <ContentControl 
+                            x:Name="ContentControl"
                             Template="{DynamicResource IconTemplate}"
-                            Foreground="{DynamicResource ForegroundBaseBrush}"
+                            Foreground="{TemplateBinding Foreground}"
                             Content="{TemplateBinding Content}"
                             Margin="{TemplateBinding Padding}"
                             FontSize="10"/>
@@ -31,6 +32,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource White5Brush}"/>
+                            <Setter TargetName="ContentControl" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource White4Brush}"/>
+                            <Setter TargetName="ContentControl" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -61,17 +67,20 @@
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="LayoutRoot" Background="Transparent" Width="{TemplateBinding Width}" VerticalAlignment="Stretch">
                         <ContentControl 
+                            x:Name="ContentControl"
                             Template="{DynamicResource IconTemplate}"
-                            Foreground="{DynamicResource ForegroundBaseBrush}"
+                            Foreground="{TemplateBinding Foreground}"
                             Content="{DynamicResource IconChromeClose}"
                             FontSize="10"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="#E81123"/>
+                            <Setter TargetName="ContentControl" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="#C50F1F"/>
+                            <Setter TargetName="ContentControl" Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

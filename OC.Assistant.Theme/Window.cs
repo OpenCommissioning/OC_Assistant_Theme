@@ -92,6 +92,7 @@ public abstract class Window : System.Windows.Window
         var titleBarHeight = (double)FindResource("TitleBarHeight");
         var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
         var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
+        var white3 = (SolidColorBrush)FindResource("White3Brush");
         var white4 = (SolidColorBrush)FindResource("White4Brush");
         var white5 = (SolidColorBrush)FindResource("White5Brush");
         var white6 = (SolidColorBrush)FindResource("White6Brush");
@@ -282,10 +283,10 @@ public abstract class Window : System.Windows.Window
             
         void ApplicationOnDeactivated(object? sender, EventArgs e)
         {
-            minimizeButton.Foreground = white4;
-            maximizeButton.Foreground = white4;
-            restoreButton.Foreground = white4;
-            closeButton.Foreground = white4;
+            minimizeButton.Foreground = white3;
+            maximizeButton.Foreground = white3;
+            restoreButton.Foreground = white3;
+            closeButton.Foreground = white3;
             titleBarGrid.Background = white5;
             title.IsEnabled = false;
         }
