@@ -1,10 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shell;
-using Microsoft.Win32;
 using OC.Assistant.Theme.Internals;
 
 namespace OC.Assistant.Theme;
@@ -47,44 +45,14 @@ public abstract class Window : System.Windows.Window
         set => SetValue(TitleBarContentProperty, value);
     }
     
-    private static bool IsWindows10()
-    {
-        try
-        {
-            var buildNumber = Registry.GetValue(
-                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", 
-                "CurrentBuild", null) as string;
-            
-            return int.TryParse(buildNumber, out var build) && build < 22000;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    
     /// <inheritdoc />
     protected Window()
     {
         InitializeComponent();
-        Loaded += MainWindowOnLoaded;
+        this.SetDarkAttribute();
+        this.AddMessageBoxHook();
     }
     
-    private void MainWindowOnLoaded(object sender, RoutedEventArgs e)
-    {
-        var source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
-        source?.AddHook(WndProc);
-    }
-    
-    private const int WM_SYS_COMMAND = 0x112;
-
-    private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-    {
-        if (msg != WM_SYS_COMMAND) return IntPtr.Zero;
-        handled = MessageBox.IsOpen;
-        return IntPtr.Zero;
-    }
-
     private void InitializeComponent()
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
@@ -93,7 +61,6 @@ public abstract class Window : System.Windows.Window
         var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
         var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
         var white3 = (SolidColorBrush)FindResource("White3Brush");
-        var white4 = (SolidColorBrush)FindResource("White4Brush");
         var white5 = (SolidColorBrush)FindResource("White5Brush");
         var white6 = (SolidColorBrush)FindResource("White6Brush");
         
@@ -101,9 +68,7 @@ public abstract class Window : System.Windows.Window
         {
             CaptionHeight = titleBarHeight,
             ResizeBorderThickness = new Thickness(5),
-            GlassFrameThickness = IsWindows10() ? 
-                new Thickness(0, 1, 0, 0) : 
-                new Thickness(1, 0, 0, 0)
+            GlassFrameThickness = new Thickness(1)
         });
 
         var rootGrid = new Grid();

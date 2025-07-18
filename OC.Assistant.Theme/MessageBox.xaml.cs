@@ -12,15 +12,7 @@ public partial class MessageBox
     private MessageBox()
     {
         InitializeComponent();
-    }
-
-    /// <inheritdoc />
-    /// <remarks>This override sets the <see cref="System.Windows.Shell.WindowChrome.GlassFrameThickness"/>
-    /// after rendering to avoid white flickering.</remarks>
-    protected override void OnContentRendered(EventArgs e)
-    {
-        base.OnContentRendered(e);
-        WindowChrome.GlassFrameThickness = new Thickness(1, 0, 0, 0);
+        this.SetDarkAttribute();
     }
 
     /// <summary>
