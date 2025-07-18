@@ -1,24 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:theme="clr-namespace:OC.Assistant.Theme">
     
     <ControlTemplate x:Key="WarningIcon" TargetType="ContentControl">
-        <Grid>
-            <ContentControl 
-                Template="{DynamicResource IconTemplateTriangle}"
-                Background="{DynamicResource WarningBrush}"
-                Foreground="{DynamicResource BackgroundBaseBrush}"
-                Content="{DynamicResource IconStatusTriangleExclamation}"
-                FontSize="{TemplateBinding FontSize}"/>
-        </Grid>
-    </ControlTemplate>
+        <ContentControl
+            Template="{DynamicResource CombinedIconTemplate}"
+            Background="{DynamicResource WarningBrush}"
+            Foreground="{DynamicResource BackgroundBaseBrush}"
+            Content="{DynamicResource IconStatusTriangleOuter}"
+            theme:Properties.AdditionalContent="{DynamicResource IconStatusTriangleExclamation}"
+            FontSize="{TemplateBinding FontSize}"/>
+    </ControlTemplate> 
     
     <ControlTemplate x:Key="InformationIcon" TargetType="ContentControl">
         <Grid>
             <ContentControl 
-                Template="{DynamicResource IconTemplateCircle}"
+                Template="{DynamicResource CombinedIconTemplate}"
                 Background="{DynamicResource AccentBrush}"
                 Foreground="{DynamicResource ForegroundBaseBrush}"
-                Content="{DynamicResource IconStatusCircleInfo}"
+                Content="{DynamicResource IconStatusCircleOuter}"
+                theme:Properties.AdditionalContent="{DynamicResource IconStatusCircleInfo}"
                 FontSize="{TemplateBinding FontSize}"/>
         </Grid>
     </ControlTemplate>
@@ -26,22 +27,23 @@
     <ControlTemplate x:Key="ErrorIcon" TargetType="ContentControl">
         <Grid>
             <ContentControl 
-                Template="{DynamicResource IconTemplateCircle}"
+                Template="{DynamicResource CombinedIconTemplate}"
                 Background="{DynamicResource DangerBrush}"
                 Foreground="{DynamicResource ForegroundBaseBrush}"
-                Content="{DynamicResource IconStatusCircleError}"
-                FontSize="{TemplateBinding FontSize}"
-                Padding="0 1 0 0"/>
+                Content="{DynamicResource IconStatusCircleOuter}"
+                theme:Properties.AdditionalContent="{DynamicResource IconStatusCircleError}"
+                FontSize="{TemplateBinding FontSize}"/>
         </Grid>
     </ControlTemplate>
     
     <ControlTemplate x:Key="QuestionIcon" TargetType="ContentControl">
         <Grid>
             <ContentControl 
-                Template="{DynamicResource IconTemplateCircle}"
+                Template="{DynamicResource CombinedIconTemplate}"
                 Background="{DynamicResource AccentBrush}"
                 Foreground="{DynamicResource ForegroundBaseBrush}"
-                Content="{DynamicResource IconStatusCircleQuestionMark}"
+                Content="{DynamicResource IconStatusCircleOuter}"
+                theme:Properties.AdditionalContent="{DynamicResource IconStatusCircleQuestionMark}"
                 FontSize="{TemplateBinding FontSize}"/>
         </Grid>
     </ControlTemplate>
@@ -56,30 +58,16 @@
         </Viewbox>
     </ControlTemplate>
     
-    <ControlTemplate x:Key="IconTemplateCircle" TargetType="ContentControl">
+    <ControlTemplate x:Key="CombinedIconTemplate" TargetType="ContentControl">
         <Viewbox Height="{TemplateBinding FontSize}"
                  Width="{TemplateBinding FontSize}">
             <Grid>
                 <Path 
-                    Data="{DynamicResource IconStatusCircleOuter}" 
+                    Data="{TemplateBinding Content}"
                     Fill="{TemplateBinding Background}"/>
                 <Path 
-                    Data="{TemplateBinding Content}" 
-                    Fill="{TemplateBinding Foreground}"
-                    Margin="{TemplateBinding Padding}"/>
-            </Grid>
-        </Viewbox>
-    </ControlTemplate>
-    
-    <ControlTemplate x:Key="IconTemplateTriangle" TargetType="ContentControl">
-        <Viewbox Height="{TemplateBinding FontSize}"
-                 Width="{TemplateBinding FontSize}">
-            <Grid>
-                <Path 
-                    Data="{DynamicResource IconStatusTriangleOuter}" 
-                    Fill="{TemplateBinding Background}"/>
-                <Path 
-                    Data="{TemplateBinding Content}" 
+                    Data="{Binding Path=(theme:Properties.AdditionalContent), 
+                        RelativeSource={RelativeSource TemplatedParent}}"
                     Fill="{TemplateBinding Foreground}"
                     Margin="{TemplateBinding Padding}"/>
             </Grid>
