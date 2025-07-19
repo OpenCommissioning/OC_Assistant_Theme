@@ -43,7 +43,7 @@
                             <Setter TargetName="Background" Property="Background" Value="{DynamicResource White4Brush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="Background" Property="Opacity" Value="0.6"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -83,8 +83,7 @@
                             <Setter TargetName="Background" Property="Background" Value="{DynamicResource Accent1Brush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
-                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource Accent2Brush}" />
+                            <Setter TargetName="Background" Property="Opacity" Value="0.6"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -125,7 +124,7 @@
                             <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource Accent1Brush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter TargetName="Background" Property="Opacity" Value="0.6"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

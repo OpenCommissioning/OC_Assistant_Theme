@@ -176,10 +176,7 @@
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" Value="{DynamicResource White5Brush}" />
-                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White5Brush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource White3Brush}" />
-                            <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White4Brush}" />
+                            <Setter Property="Opacity" Value="0.6"></Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource White1Brush}" />
