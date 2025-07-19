@@ -1,14 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Media;
 
 namespace OC.Assistant.Theme;
 
 /// <summary>
-/// Represents a <see cref="Grid"/> element to work as an overlay when the application is busy.
+/// Represents an animated <see cref="System.Windows.Controls.Grid"/>
+/// element to work as an overlay when the application is busy.
 /// </summary>
 public partial class BusyOverlay
 {
-    private readonly RotateTransform _rotateTransform = new ();
     private CancellationTokenSource? _cts;
     private static bool _hasBeenCreated;
     
@@ -19,8 +18,9 @@ public partial class BusyOverlay
     {
         if (_hasBeenCreated) throw new InvalidOperationException("BusyOverlay can only be created once");
         _hasBeenCreated = true;
+        
         InitializeComponent();
-        Size = 100;
+        Size = 50;
         StateChanged += OnStateChanged;
     }
 
@@ -53,26 +53,20 @@ public partial class BusyOverlay
             }
             if (Visibility == Visibility.Visible) return;
             Visibility = Visibility.Visible;
-            StartRotate();
+            StartAnimation();
         });
     }
 
     /// <summary>
-    /// Sets the size of the animated icon. Default value is 100.
+    /// Sets the size of the animated icon in device-independent units (1/96th inch per unit).
+    /// The default value is 50. This value must be equal to or greater than 0.0.
     /// </summary>
     public double Size
     {
-        set
-        {
-            Grid.Height = value;
-            Grid.Width = value;
-            Grid.Margin = new Thickness(value, value, 0, 0);
-            Label.Margin = new Thickness(-value, -value, 0, 0);
-            Label.FontSize = value / 2;
-        }
+        set => Scale.ScaleX = Scale.ScaleY = value / 100;
     }
     
-    private void StartRotate()
+    private void StartAnimation()
     {
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
@@ -86,8 +80,8 @@ public partial class BusyOverlay
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        _rotateTransform.Angle += 3.0;
-                        Grid.RenderTransform = _rotateTransform;
+                        RotateTransformOuter.Angle += 3;
+                        RotateTransformInner.Angle += 6;
                     });
 
                     await Task.Delay(16, token);
