@@ -11,7 +11,7 @@ namespace OC.Assistant.Theme;
 /// <remarks>
 /// Implements a custom TitleBar and a <see cref="BusyOverlay"/>.<br/><br/>
 /// Content inside the TitleBar can be rendered by setting the <see cref="TitleBarContent"/>.<br/><br/>
-/// To activate/deactivate the <see cref="BusyOverlay"/>, call<br/>
+/// To activate/deactivate the <see cref="BusyOverlay"/>, call
 /// <see cref="BusyOverlay.SetState(bool)"/> anywhere in your application. 
 /// </remarks>
 public abstract class Window : System.Windows.Window
@@ -58,7 +58,6 @@ public abstract class Window : System.Windows.Window
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
         
         var titleBarHeight = (double)FindResource("TitleBarHeight");
-        var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
         var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
         var white3 = (SolidColorBrush)FindResource("White3Brush");
         var white5 = (SolidColorBrush)FindResource("White5Brush");
@@ -84,7 +83,6 @@ public abstract class Window : System.Windows.Window
         
         var contentGrid = new Grid
         {
-            Background = background,
             RowDefinitions =
             {
                 new RowDefinition { Height = new GridLength(titleBarHeight) },
@@ -110,7 +108,7 @@ public abstract class Window : System.Windows.Window
             {
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) },
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) },
-                new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
             }
         };
         

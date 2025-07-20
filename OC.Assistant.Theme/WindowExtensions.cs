@@ -9,15 +9,23 @@ namespace OC.Assistant.Theme;
 /// </summary>
 internal static class WindowExtensions
 {
-    private const int WM_SYS_COMMAND = 0x112;
+    private const int WM_INIT_MENU = 0x0116;
     
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(IntPtr handle, int attr, ref bool attrValue, int attrSize);
     
+    [DllImport("user32.dll")]
+    private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+    
     private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (msg != WM_SYS_COMMAND) return IntPtr.Zero;
-        handled = MessageBox.IsOpen;
+        if (!MessageBox.IsOpen || msg != WM_INIT_MENU)
+        {
+            return IntPtr.Zero;
+        }
+
+        SendMessage(hWnd, 0x001F, IntPtr.Zero, IntPtr.Zero);
+        handled = true;
         return IntPtr.Zero;
     }
     
