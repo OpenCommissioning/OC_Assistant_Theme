@@ -29,6 +29,26 @@ internal static class WindowExtensions
     /// </remarks>
     private const int WM_CANCELMODE = 0x001F;
     
+    ///<summary>
+    /// Specifies the message when the user chooses a command from the Window menu.
+    ///</summary>
+    /// <remarks>
+    /// See microsoft documentation for the
+    /// <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
+    /// WM_SYSCOMMAND message</see>
+    /// </remarks>
+    private const int WM_SYSCOMMAND = 0x0112;
+    
+    ///<summary>
+    /// Specifies the parameter to minimize the window.
+    ///</summary>
+    /// <remarks>
+    /// See microsoft documentation for the
+    /// <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
+    /// WM_SYSCOMMAND message</see>
+    /// </remarks>
+    private const int SC_MINIMIZE = 0xF020;
+    
     /// <summary>
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
     /// </summary>
@@ -53,7 +73,8 @@ internal static class WindowExtensions
     
     /// <summary>
     /// Represents the method that handles Win32 window messages.
-    /// This implementation cancels the title bar's context menu when the <see cref="MessageBox"/> is open.
+    /// This implementation cancels the title bar's context menu and prevents the application from getting minimized
+    /// when the <see cref="MessageBox"/> is open.
     /// </summary>
     /// <remarks>
     /// See microsoft documentation for the
@@ -62,13 +83,23 @@ internal static class WindowExtensions
     /// </remarks>
     private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (!MessageBox.IsOpen || msg != WM_INITMENU)
-        {
-            return IntPtr.Zero;
-        }
+        if (!MessageBox.IsOpen) return IntPtr.Zero;
 
-        SendMessage(hWnd, WM_CANCELMODE, IntPtr.Zero, IntPtr.Zero);
-        handled = true;
+        switch (msg)
+        {
+            case WM_INITMENU:
+                SendMessage(hWnd, WM_CANCELMODE, IntPtr.Zero, IntPtr.Zero);
+                handled = true;
+                break;
+            case WM_SYSCOMMAND: 
+                var sc = (int)(wParam.ToInt64() & 0xFFF0);
+                if (sc == SC_MINIMIZE)
+                {
+                    handled = true;
+                }
+                break;
+        }
+        
         return IntPtr.Zero;
     }
     
