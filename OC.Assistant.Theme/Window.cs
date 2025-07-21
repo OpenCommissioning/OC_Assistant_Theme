@@ -81,6 +81,7 @@ public abstract class Window : System.Windows.Window
             VerticalAlignment = VerticalAlignment.Stretch,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             Background = Brushes.Transparent,
+            BorderThickness = new Thickness(0),
             Visibility = Visibility.Collapsed
         };
         WindowChrome.SetIsHitTestVisibleInChrome(blockingElement, true);
