@@ -186,7 +186,7 @@
                         </Trigger>
                         <Trigger Property="IsSelectionActive" Value="true">
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White3Brush}" />
-                            <Setter Property="Background" Value="{DynamicResource BackgroundBaseBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource DarkBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderThickness" Value="1" />
                             <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
