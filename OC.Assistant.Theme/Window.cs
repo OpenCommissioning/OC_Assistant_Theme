@@ -51,7 +51,6 @@ public abstract class Window : System.Windows.Window
     {
         InitializeComponent();
         this.SetDarkAttribute();
-        this.AddMessageBoxHook();
     }
     
     private void InitializeComponent()
@@ -73,16 +72,11 @@ public abstract class Window : System.Windows.Window
 
         var rootGrid = new Grid();
 
-        var blockingElement = new TextBox
+        var blockingElement = new Grid
         {
-            Style = null,
-            IsReadOnly = true,
-            Cursor = Cursors.Arrow,
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Focusable = true,
             Background = Brushes.Transparent,
-            BorderThickness = new Thickness(0),
-            Visibility = Visibility.Collapsed
+            Visibility = Visibility.Hidden
         };
         WindowChrome.SetIsHitTestVisibleInChrome(blockingElement, true);
         
@@ -205,12 +199,12 @@ public abstract class Window : System.Windows.Window
         void MessageBoxOnShown()
         {
             blockingElement.Visibility = Visibility.Visible;
+            blockingElement.Focus();
             ApplicationOnDeactivated(null, EventArgs.Empty);
         }
-        
         void MessageBoxOnHidden(MessageBoxResult result)
         {
-            blockingElement.Visibility = Visibility.Collapsed;
+            blockingElement.Visibility = Visibility.Hidden;
             ApplicationOnActivated(null, EventArgs.Empty);
             Activate();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace OC.Assistant.Theme;
 
@@ -18,9 +19,7 @@ public partial class BusyOverlay
     {
         if (_hasBeenCreated) throw new InvalidOperationException("BusyOverlay can only be created once");
         _hasBeenCreated = true;
-        
         InitializeComponent();
-        Size = 50;
         StateChanged += OnStateChanged;
     }
 
@@ -51,19 +50,12 @@ public partial class BusyOverlay
                 Visibility = Visibility.Hidden;
                 return;
             }
+            
             if (Visibility == Visibility.Visible) return;
             Visibility = Visibility.Visible;
+            Focus();
             StartAnimation();
         });
-    }
-
-    /// <summary>
-    /// Sets the size of the animated icon in device-independent units (1/96th inch per unit).
-    /// The default value is 50. This value must be equal to or greater than 0.0.
-    /// </summary>
-    public double Size
-    {
-        set => Scale.ScaleX = Scale.ScaleY = value / 100;
     }
     
     private void StartAnimation()
@@ -80,8 +72,7 @@ public partial class BusyOverlay
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        RotateTransformOuter.Angle += 3;
-                        RotateTransformInner.Angle += 6;
+                        RotateTransform.Angle += 8;
                     });
 
                     await Task.Delay(16, token);

@@ -28,12 +28,6 @@ public partial class MessageBox
     public new static event Action<MessageBoxResult>? Closed;
     
     /// <summary>
-    /// Indicates whether the message box is currently open or not.
-    /// </summary>
-    /// <returns>True if the message box is open, otherwise false.</returns>
-    public static bool IsOpen { get; private set; }
-    
-    /// <summary>
     /// Shows the message box with the given parameters. 
     /// </summary>
     /// <param name="caption">The caption of the message box.</param>
@@ -71,6 +65,7 @@ public partial class MessageBox
     {
         var mainWindow = Application.Current.MainWindow;
         if (mainWindow is null || messageBox.Content is not FrameworkElement content) {return MessageBoxResult.None;}
+        mainWindow.DisableContextMenu();
         messageBox.Owner = mainWindow;
         
         content.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -79,10 +74,12 @@ public partial class MessageBox
         messageBox.Left = mainWindow.Left + mainWindow.Width / 2 - content.DesiredSize.Width / 2;
         messageBox.Height = content.DesiredSize.Height + 2;
         messageBox.Width = content.DesiredSize.Width + 2;
-        IsOpen = true;
+
         messageBox.Show();
         Shown?.Invoke();
-        return await WaitForClosed();
+        var result = await WaitForClosed();
+        mainWindow.EnableContextMenu();
+        return result;
     }
     
     private static async Task<MessageBoxResult> WaitForClosed()
@@ -157,7 +154,6 @@ public partial class MessageBox
         else if (sender.Equals(ButtonNo)) result = MessageBoxResult.No;
         else if (sender.Equals(ButtonCancel)) result = MessageBoxResult.Cancel;
         
-        IsOpen = false;
         Closed?.Invoke(result);
         Close();
     }

@@ -13,9 +13,8 @@ internal static class WindowExtensions
     /// Specifies the message sent to a window when a menu is about to be displayed.
     ///</summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/en-us/windows/win32/menurc/wm-initmenu">
-    /// WM_INITMENU message</see>
+    /// See <see href="https://learn.microsoft.com/en-us/windows/win32/menurc/wm-initmenu">
+    /// microsoft documentation</see>
     /// </remarks>
     private const int WM_INITMENU = 0x0116;
     
@@ -23,9 +22,8 @@ internal static class WindowExtensions
     /// Specifies the message to cancel certain modes, such as mouse capture.
     ///</summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-cancelmode">
-    /// WM_CANCELMODE message</see>
+    /// See <see href="https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-cancelmode">
+    /// microsoft documentation</see>
     /// </remarks>
     private const int WM_CANCELMODE = 0x001F;
     
@@ -33,9 +31,8 @@ internal static class WindowExtensions
     /// Specifies the message when the user chooses a command from the Window menu.
     ///</summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
-    /// WM_SYSCOMMAND message</see>
+    /// See <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
+    /// microsoft documentation</see>
     /// </remarks>
     private const int WM_SYSCOMMAND = 0x0112;
     
@@ -43,9 +40,8 @@ internal static class WindowExtensions
     /// Specifies the parameter to minimize the window.
     ///</summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
-    /// WM_SYSCOMMAND message</see>
+    /// See <see href="https://learn.microsoft.com/de-de/windows/win32/menurc/wm-syscommand">
+    /// microsoft documentation</see>
     /// </remarks>
     private const int SC_MINIMIZE = 0xF020;
     
@@ -53,9 +49,8 @@ internal static class WindowExtensions
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
     /// </summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute">
-    /// DwmSetWindowAttribute function</see>
+    /// See <see href="https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute">
+    /// microsoft documentation</see>
     /// </remarks>
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(IntPtr handle, int attr, ref bool attrValue, int attrSize);
@@ -64,9 +59,8 @@ internal static class WindowExtensions
     /// Sends the specified message to a window or windows.
     /// </summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessage">
-    /// SendMessage function</see>
+    /// See <see href="https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessage">
+    /// microsoft documentation</see>
     /// </remarks>
     [DllImport("user32.dll")]
     private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
@@ -77,14 +71,11 @@ internal static class WindowExtensions
     /// when the <see cref="MessageBox"/> is open.
     /// </summary>
     /// <remarks>
-    /// See microsoft documentation for the
-    /// <see href="https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wndproc">
-    /// WndProc callback function</see>
+    /// See <see href="https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wndproc">
+    /// microsoft documentation</see>
     /// </remarks>
     private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (!MessageBox.IsOpen) return IntPtr.Zero;
-
         switch (msg)
         {
             case WM_INITMENU:
@@ -122,19 +113,24 @@ internal static class WindowExtensions
     }
 
     /// <summary>
-    /// Adds a hook to the message loop of the specified <see cref="System.Windows.Window"/>.
+    /// Disables the title bar's context menu.
     /// </summary>
     /// <param name="window">The <see cref="System.Windows.Window"/> instance to which the hook is added.</param>
-    /// <remarks>Is used to disable the title bar's context menu when the <see cref="MessageBox"/> is open.</remarks>
-    public static void AddMessageBoxHook(this System.Windows.Window window)
+    /// <remarks>Adds a hook to the window's message loop.</remarks>
+    public static void DisableContextMenu(this System.Windows.Window window)
     {
-        window.Loaded += WindowOnLoaded;
-        return;
-        
-        void WindowOnLoaded(object o, RoutedEventArgs routedEventArgs)
-        {
-            var handle = new WindowInteropHelper(window).Handle;
-            HwndSource.FromHwnd(handle)?.AddHook(WndProc);
-        }
+        var handle = new WindowInteropHelper(window).Handle;
+        HwndSource.FromHwnd(handle)?.AddHook(WndProc);
+    }
+    
+    /// <summary>
+    /// Re-enables the title bar's context menu if it has been disabled via <see cref="DisableContextMenu"/>.
+    /// </summary>
+    /// <param name="window">The <see cref="System.Windows.Window"/> instance from which the hook is removed.</param>
+    /// <remarks> Removes a hook from the window's message loop.</remarks>
+    public static void EnableContextMenu(this System.Windows.Window window)
+    {
+        var handle = new WindowInteropHelper(window).Handle;
+        HwndSource.FromHwnd(handle)?.RemoveHook(WndProc);
     }
 }
