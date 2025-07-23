@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:internals="clr-namespace:OC.Assistant.Theme.Internals">
+    xmlns:theme="clr-namespace:OC.Assistant.Theme">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="TextBox.xaml" />
@@ -127,7 +127,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}" />
+                            CornerRadius="{TemplateBinding theme:Properties.CornerRadius}" />
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Style="{DynamicResource TextControlContentHostStyle}"
@@ -142,7 +142,7 @@
                             Foreground="{DynamicResource White2Brush}"
                             Margin="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
-                            Text="{TemplateBinding internals:ControlHelper.PlaceholderText}"
+                            Text="{TemplateBinding theme:Properties.PlaceholderText}"
                             TextAlignment="{TemplateBinding TextAlignment}"
                             TextWrapping="{TemplateBinding TextWrapping}"
                             IsHitTestVisible="False"
@@ -197,8 +197,8 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
-        <Setter Property="internals:ControlHelper.PlaceholderForeground" Value="{DynamicResource White2Brush}" />
-        <Setter Property="internals:ControlHelper.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="theme:Properties.PlaceholderForeground" Value="{DynamicResource White2Brush}" />
+        <Setter Property="theme:Properties.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource TextControlValidationErrorTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -231,12 +231,12 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            Content="{TemplateBinding internals:ControlHelper.Header}"
-                            ContentTemplate="{TemplateBinding internals:ControlHelper.HeaderTemplate}"
+                            Content="{TemplateBinding theme:Properties.Header}"
+                            ContentTemplate="{TemplateBinding theme:Properties.HeaderTemplate}"
                             FlowDirection="{TemplateBinding FlowDirection}"
                             Margin="0,0,0,4"
                             VerticalAlignment="Top"
-                            Visibility="{TemplateBinding internals:ControlHelper.HeaderVisibility}"
+                            Visibility="{TemplateBinding theme:Properties.HeaderVisibility}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         <Border
                             x:Name="Background"
@@ -246,7 +246,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}"
+                            CornerRadius="{TemplateBinding theme:Properties.CornerRadius}"
                             MinWidth="64"/>
                         <Border
                             x:Name="HighlightBackground"
@@ -256,7 +256,7 @@
                             Background="{DynamicResource Accent2Brush}"
                             BorderBrush="{DynamicResource White3Brush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}"
+                            CornerRadius="{TemplateBinding theme:Properties.CornerRadius}"
                             Opacity="0" />
                         <ContentPresenter
                             x:Name="ContentPresenter"
@@ -278,8 +278,8 @@
                             Padding="0,0,32,0"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Text="{TemplateBinding internals:ControlHelper.PlaceholderText}"
-                            Foreground="{TemplateBinding internals:ControlHelper.PlaceholderForeground}"
+                            Text="{TemplateBinding theme:Properties.PlaceholderText}"
+                            Foreground="{TemplateBinding theme:Properties.PlaceholderForeground}"
                             IsHitTestVisible="False"
                             Visibility="Collapsed" />
                         <ToggleButton
@@ -303,11 +303,11 @@
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            internals:ControlHelper.PlaceholderText="{TemplateBinding internals:ControlHelper.PlaceholderText}"
-                            internals:ControlHelper.PlaceholderForeground="{TemplateBinding internals:ControlHelper.PlaceholderForeground}"
+                            theme:Properties.PlaceholderText="{TemplateBinding theme:Properties.PlaceholderText}"
+                            theme:Properties.PlaceholderForeground="{TemplateBinding theme:Properties.PlaceholderForeground}"
                             Visibility="Collapsed"
                             AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
-                            internals:ControlHelper.CornerRadius="{TemplateBinding internals:ControlHelper.CornerRadius}" />
+                            theme:Properties.CornerRadius="{TemplateBinding theme:Properties.CornerRadius}" />
                         <ToggleButton
                             x:Name="DropDownOverlay"
                             IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -319,29 +319,29 @@
                             Visibility="Collapsed"
                             Width="30"
                             HorizontalAlignment="Right" />
-                        <Label
+                        <ContentControl
                             x:Name="DropDownGlyph"
                             MinHeight="24"
                             Grid.Row="1"
                             Grid.Column="1"
                             IsHitTestVisible="False"
-                            Margin="0,0,10,0"
+                            Margin="0,-2,10,2"
                             Foreground="{DynamicResource White1Brush}"
-                            FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                            Template="{DynamicResource IconTemplate}"
+                            Content="{DynamicResource IconChevronDown}"
                             FontSize="12"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center">
-                            &#xE70D;
-                        </Label>
+                        </ContentControl>
                         <ContentPresenter
                             x:Name="DescriptionPresenter"
                             Grid.Row="2"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             TextElement.Foreground="{DynamicResource White2Brush}"
-                            Content="{TemplateBinding internals:ControlHelper.Description}"
-                            Visibility="{TemplateBinding internals:ControlHelper.DescriptionVisibility}"
+                            Content="{TemplateBinding theme:Properties.Description}"
+                            Visibility="{TemplateBinding theme:Properties.DescriptionVisibility}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         <Popup
                             Grid.Row="0" Grid.Column="0" x:Name="PART_Popup"
@@ -390,11 +390,7 @@
                         </Trigger>
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Background" Property="Background" Value="{DynamicResource White5Brush}" />
-                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource White5Brush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource White3Brush}" />
-                            <Setter TargetName="PlaceholderTextBlock" Property="Foreground" Value="{DynamicResource White4Brush}" />
-                            <Setter TargetName="DropDownGlyph" Property="Foreground" Value="{DynamicResource White3Brush}" />
+                            <Setter Property="Opacity" Value="0.6"></Setter>
                         </Trigger>
                         <!-- FocusedDropDown -->
                         <MultiTrigger>
@@ -482,7 +478,7 @@
         <Setter Property="Padding" Value="12,0,0,0" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="internals:ControlHelper.CornerRadius" Value="0" />
+        <Setter Property="theme:Properties.CornerRadius" Value="0" />
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource DataGridTextControlValidationErrorTemplate}" />
     </Style>
 

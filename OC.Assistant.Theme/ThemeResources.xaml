@@ -7,9 +7,8 @@
     <CornerRadius x:Key="ControlCornerRadius">3</CornerRadius>
     <system:Double x:Key="CornerRadiusValue">3</system:Double>
     
-    <!-- Fonts -->
+    <!-- Font -->
     <FontFamily x:Key="ThemeFontFamily">Segoe UI</FontFamily>
-    <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
     <system:Double x:Key="ThemeFontSize">12</system:Double>
     
     <!-- TitleBar -->
@@ -23,6 +22,7 @@
     <SolidColorBrush x:Key="Accent3Brush" Color="#4C4571F5" />
     <SolidColorBrush x:Key="DarkBrush" Color="#000000" />
     <SolidColorBrush x:Key="Dark1Brush" Color="#66000000" />
+    <SolidColorBrush x:Key="Dark2Brush" Color="#33000000" />
     <SolidColorBrush x:Key="WhiteBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="White1Brush" Color="#CCFFFFFF" />
     <SolidColorBrush x:Key="White2Brush" Color="#99FFFFFF" />
@@ -36,7 +36,6 @@
     <SolidColorBrush x:Key="LinkBrush" Color="#6090F5" />
     <SolidColorBrush x:Key="SuccessBrush" Color="#32DD32" />
     <SolidColorBrush x:Key="Success1Brush" Color="#D032DD32" />
-    <SolidColorBrush x:Key="InfoBrush" Color="#76A6ED" />
     <SolidColorBrush x:Key="WarningBrush" Color="#EEC63F" />
     <SolidColorBrush x:Key="DangerBrush" Color="#BE4846" />
     
@@ -46,6 +45,7 @@
         <ResourceDictionary Source="Styles/SelectButton.xaml" />
         <ResourceDictionary Source="Styles/LinkButton.xaml" />
         <ResourceDictionary Source="Styles/CheckBox.xaml" />
+        <ResourceDictionary Source="Styles/Icons.xaml" />
         <ResourceDictionary Source="Styles/ComboBox.xaml" />
         <ResourceDictionary Source="Styles/Label.xaml" />
         <ResourceDictionary Source="Styles/Menu.xaml" />

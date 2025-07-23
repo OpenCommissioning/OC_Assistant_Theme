@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Shell;
 using OC.Assistant.Theme.Internals;
 
@@ -10,13 +10,9 @@ namespace OC.Assistant.Theme;
 
 /// <inheritdoc />
 /// <remarks>
-/// Implements a custom TitleBar, a <see cref="Modal"/> and a <see cref="BusyOverlay"/>.<br/><br/>
+/// Implements a custom TitleBar and a <see cref="BusyOverlay"/>.<br/><br/>
 /// Content inside the TitleBar can be rendered by setting the <see cref="TitleBarContent"/>.<br/><br/>
-/// To show the <see cref="Modal"/>, call
-/// <see cref="Modal.Show(string, UIElement, MessageBoxButton, MessageBoxImage)"/> or
-/// <see cref="Modal.Show(string, string, MessageBoxButton, MessageBoxImage)"/>
-/// anywhere in your application.<br/><br/>
-/// To activate/deactivate the <see cref="BusyOverlay"/>, call<br/>
+/// To activate/deactivate the <see cref="BusyOverlay"/>, call
 /// <see cref="BusyOverlay.SetState(bool)"/> anywhere in your application. 
 /// </remarks>
 public abstract class Window : System.Windows.Window
@@ -54,16 +50,16 @@ public abstract class Window : System.Windows.Window
     protected Window()
     {
         InitializeComponent();
+        this.SetDarkAttribute();
     }
-
+    
     private void InitializeComponent()
     {
         SetResourceReference(StyleProperty, "DefaultWindowStyle");
         
         var titleBarHeight = (double)FindResource("TitleBarHeight");
-        var background = (SolidColorBrush)FindResource("BackgroundBaseBrush");
         var foreground = (SolidColorBrush)FindResource("ForegroundBaseBrush");
-        var white4 = (SolidColorBrush)FindResource("White4Brush");
+        var white3 = (SolidColorBrush)FindResource("White3Brush");
         var white5 = (SolidColorBrush)FindResource("White5Brush");
         var white6 = (SolidColorBrush)FindResource("White6Brush");
         
@@ -73,27 +69,19 @@ public abstract class Window : System.Windows.Window
             ResizeBorderThickness = new Thickness(5),
             GlassFrameThickness = new Thickness(1)
         });
-        
-        var rootBorder = new Border
-        {
-            BorderThickness = new Thickness(0)
-        };
 
         var rootGrid = new Grid();
-        
-        var blurEffect = new BlurEffect
+
+        var blockingElement = new Grid
         {
-            Radius = 0
+            Focusable = true,
+            Background = Brushes.Transparent,
+            Visibility = Visibility.Hidden
         };
-        
-        var contentBorder = new Border
-        {
-            Effect = blurEffect
-        };
+        WindowChrome.SetIsHitTestVisibleInChrome(blockingElement, true);
         
         var contentGrid = new Grid
         {
-            Background = background,
             RowDefinitions =
             {
                 new RowDefinition { Height = new GridLength(titleBarHeight) },
@@ -119,7 +107,7 @@ public abstract class Window : System.Windows.Window
             {
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) },
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) },
-                new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
             }
         };
         
@@ -185,12 +173,6 @@ public abstract class Window : System.Windows.Window
         closeButton.Click += CloseOnClick;
         WindowChrome.SetIsHitTestVisibleInChrome(closeButton, true);
         
-        var modal = new Modal
-        {
-            BlurEffect = blurEffect
-        };
-        WindowChrome.SetIsHitTestVisibleInChrome(modal, true);
-        
         buttonStack.Children.Add(minimizeButton);
         buttonStack.Children.Add(restoreButton);
         buttonStack.Children.Add(maximizeButton);
@@ -202,17 +184,30 @@ public abstract class Window : System.Windows.Window
         titleBarGrid.Children.Add(buttonStack);
         contentGrid.Children.Add(titleBarGrid);
         contentGrid.Children.Add(customContentGrid);
-        contentBorder.Child = contentGrid;
-        rootGrid.Children.Add(contentBorder);
-        rootGrid.Children.Add(modal);
-        rootBorder.Child = rootGrid;
+        rootGrid.Children.Add(contentGrid);
+        rootGrid.Children.Add(blockingElement);
         
         Initialized += WindowOnInitialized;
         StateChanged += WindowOnStateChanged;
         Application.Current.Activated += ApplicationOnActivated;
         Application.Current.Deactivated += ApplicationOnDeactivated;
         BusyOverlay.StateChanged += BusyOverlayOnStateChanged;
+        MessageBox.Shown += MessageBoxOnShown;
+        MessageBox.Closed += MessageBoxOnHidden;
         return;
+        
+        void MessageBoxOnShown()
+        {
+            blockingElement.Visibility = Visibility.Visible;
+            blockingElement.Focus();
+            ApplicationOnDeactivated(null, EventArgs.Empty);
+        }
+        void MessageBoxOnHidden(MessageBoxResult result)
+        {
+            blockingElement.Visibility = Visibility.Hidden;
+            ApplicationOnActivated(null, EventArgs.Empty);
+            Activate();
+        }
 
         void WindowOnInitialized(object? sender, EventArgs e)
         {
@@ -234,11 +229,12 @@ public abstract class Window : System.Windows.Window
                 Content = Content
             });
             customContentGrid.Children.Add(new BusyOverlay());
-            Content = rootBorder;
+            Content = rootGrid;
         }
             
         void ApplicationOnActivated(object? sender, EventArgs e)
         {
+            if (blockingElement.Visibility == Visibility.Visible) return;
             minimizeButton.Foreground = foreground;
             maximizeButton.Foreground = foreground;
             restoreButton.Foreground = foreground;
@@ -249,10 +245,10 @@ public abstract class Window : System.Windows.Window
             
         void ApplicationOnDeactivated(object? sender, EventArgs e)
         {
-            minimizeButton.Foreground = white4;
-            maximizeButton.Foreground = white4;
-            restoreButton.Foreground = white4;
-            closeButton.Foreground = white4;
+            minimizeButton.Foreground = white3;
+            maximizeButton.Foreground = white3;
+            restoreButton.Foreground = white3;
+            closeButton.Foreground = white3;
             titleBarGrid.Background = white5;
             title.IsEnabled = false;
         }
@@ -261,13 +257,13 @@ public abstract class Window : System.Windows.Window
         {
             if (WindowState == WindowState.Maximized)
             {
-                rootBorder.Margin = new Thickness(8);
+                rootGrid.Margin = new Thickness(8);
                 restoreButton.Visibility = Visibility.Visible;
                 maximizeButton.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            rootBorder.Margin = new Thickness(0);
+            rootGrid.Margin = new Thickness(0);
             restoreButton.Visibility = Visibility.Collapsed;
             maximizeButton.Visibility = Visibility.Visible;
         }

@@ -1,15 +1,30 @@
 ﻿<Grid x:Class="OC.Assistant.Theme.BusyOverlay"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Visibility="Hidden" >
-    <Grid>
-        <Grid Background="{DynamicResource BackgroundBaseBrush}" Opacity="0.3"></Grid>
-        <Grid x:Name="Grid">
-            <Label x:Name="Label"
-                   FontFamily="{DynamicResource SymbolThemeFontFamily}" 
-                   Foreground="{DynamicResource White3Brush}">
-                
-            </Label>
-        </Grid>
-    </Grid>
+      Visibility="Hidden"
+      Focusable="True">
+    <Grid Background="{DynamicResource BackgroundBaseBrush}" Opacity="0.3"/>
+    <Viewbox Height="50">
+        <Canvas Height="200" Width="200">
+            <Path 
+                Fill="{DynamicResource White4Brush}"
+                Data="M 0 100 
+                      a 100,100 0 1 1 200,0 
+                      a 100,100 0 1 1 -200,0 
+                      M 20 100 
+                      a 80,80 0 1 1 160,0 
+                      a 80,80 0 1 1 -160,0"/>
+            <Path
+                Fill="{DynamicResource White3Brush}"
+                Data="M 0 100 
+                      a 100,100 0 0 1 100,-100 
+                      v 20 
+                      a 80,80 0 0 0 -80,80"
+                RenderTransformOrigin="1,1">
+                <Path.RenderTransform>
+                    <RotateTransform x:Name="RotateTransform"/>
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+    </Viewbox>
 </Grid>

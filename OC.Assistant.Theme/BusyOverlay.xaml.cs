@@ -1,14 +1,14 @@
 ﻿using System.Windows;
-using System.Windows.Media;
+using System.Windows.Input;
 
 namespace OC.Assistant.Theme;
 
 /// <summary>
-/// Represents a <see cref="Grid"/> element to work as an overlay when the application is busy.
+/// Represents an animated <see cref="System.Windows.Controls.Grid"/>
+/// element to work as an overlay when the application is busy.
 /// </summary>
 public partial class BusyOverlay
 {
-    private readonly RotateTransform _rotateTransform = new ();
     private CancellationTokenSource? _cts;
     private static bool _hasBeenCreated;
     
@@ -20,7 +20,6 @@ public partial class BusyOverlay
         if (_hasBeenCreated) throw new InvalidOperationException("BusyOverlay can only be created once");
         _hasBeenCreated = true;
         InitializeComponent();
-        Size = 100;
         StateChanged += OnStateChanged;
     }
 
@@ -51,28 +50,15 @@ public partial class BusyOverlay
                 Visibility = Visibility.Hidden;
                 return;
             }
+            
             if (Visibility == Visibility.Visible) return;
             Visibility = Visibility.Visible;
-            StartRotate();
+            Focus();
+            StartAnimation();
         });
     }
-
-    /// <summary>
-    /// Sets the size of the animated icon. Default value is 100.
-    /// </summary>
-    public double Size
-    {
-        set
-        {
-            Grid.Height = value;
-            Grid.Width = value;
-            Grid.Margin = new Thickness(value, value, 0, 0);
-            Label.Margin = new Thickness(-value / 4, -value / 4, 0, 0);
-            Label.FontSize = value / 2;
-        }
-    }
     
-    private void StartRotate()
+    private void StartAnimation()
     {
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
@@ -86,8 +72,7 @@ public partial class BusyOverlay
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        _rotateTransform.Angle += 3.0;
-                        Grid.RenderTransform = _rotateTransform;
+                        RotateTransform.Angle += 8;
                     });
 
                     await Task.Delay(16, token);
