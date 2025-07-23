@@ -29,7 +29,8 @@ Content inside the TitleBar can als be rendered by setting `theme:Window.TitleBa
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:theme="http://schemas.open-commissioning-assistant.com/2024"
         mc:Ignorable="d"
-        theme:WindowStyle.UseTheme="True">
+		ShowIcon="True"
+		ShowTitle="False">
     <theme:Windows.TitleBarContent>
         <!-- Here goes your titleBar content. Usually a Menu with MenuItems. -->
     </theme:Windows.TitleBarContent>
