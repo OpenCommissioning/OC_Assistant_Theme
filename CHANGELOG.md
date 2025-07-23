@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.1.0"></a>
+## [2.1.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.0) (2025-07-23)
+
+### Features
+
+* design rework ([41dcd5f](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/41dcd5ffd44190065bfe80d961099780166ceff9))
+* replace Segoe MDL2 assets with native svg based icons ([270e2f0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/270e2f0a8f25f658837c97cb4438161893f816a4))
+
+### Bug Fixes
+
+* BusyOverlay rework ([fb30783](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/fb307830c691bf55fea415b8c07dfe9c7e6fa6ba))
+* disabled colors for several controls ([d287fb3](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/d287fb38e53c6cbf32a878b4cfb77093c951fd62))
+* reveal dependency properties to public ([f98d5b1](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/f98d5b1b5446dd4be56f41bcae7d6da73d60890e))
+* set ResizeMode of MessageBox to NoResize ([f4eeb23](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/f4eeb23ee816a8517079459ddafc5907ea055870))
+* TaskBar behaviour when MessageBox is open ([264040c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/264040c08634c751707d135b4faad53a48fe75c0))
+* white flickering when resizing the Window ([e45ecdd](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/e45ecdda002773ee3228e492a1cd0e307660cee3))
+* windows message handling when MessageBox is open ([31d496c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/31d496c34e8a9dc987b0098e2c2131e4beb578f4))
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.0.1) (2025-07-15)
 
