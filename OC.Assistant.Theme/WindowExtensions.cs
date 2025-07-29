@@ -133,4 +133,28 @@ internal static class WindowExtensions
         var handle = new WindowInteropHelper(window).Handle;
         HwndSource.FromHwnd(handle)?.RemoveHook(WndProc);
     }
+    
+    /// <summary>
+    /// Performs a shake animation on the window.
+    /// </summary>
+    /// <param name="window">The <see cref="System.Windows.Window"/> instance to which the shake animation is applied.</param>
+    /// <param name="initialAmplitude">The initial amplitude of the shake animation.</param>
+    /// <param name="shakes">The number of shakes to apply.</param>
+    /// <param name="delay">The delay between shakes.</param>
+    public static void Shake(this System.Windows.Window window, int initialAmplitude = 10, int shakes = 5, int delay = 50)
+    {
+        Application.Current.Dispatcher.Invoke(async () =>
+        {
+            var originalLeft = window.Left;
+
+            for (var i = 0; i < shakes; i++)
+            {
+                var offset = (int)(initialAmplitude * Math.Pow(0.8, i));
+                window.Left = originalLeft + (i % 2 == 0 ? offset : -offset);
+                await Task.Delay(delay);
+            }
+
+            window.Left = originalLeft;
+        });
+    }
 }

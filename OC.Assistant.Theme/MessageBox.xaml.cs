@@ -170,8 +170,12 @@ public partial class MessageBox
         else if (sender.Equals(ButtonYes)) result = MessageBoxResult.Yes;
         else if (sender.Equals(ButtonNo)) result = MessageBoxResult.No;
         else if (sender.Equals(ButtonCancel)) result = MessageBoxResult.Cancel;
-        
-        if (result is MessageBoxResult.OK or MessageBoxResult.Yes && _condition?.Invoke() == false) return;
+
+        if (result is MessageBoxResult.OK or MessageBoxResult.Yes && _condition?.Invoke() == false)
+        {
+            this.Shake();
+            return;
+        }
         
         Closed?.Invoke(result);
         Close();
