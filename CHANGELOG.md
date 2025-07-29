@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.1) (2025-07-29)
+
+### Bug Fixes
+
+* **MessageBox:** add a shake animation to visualize false condition ([c1cee54](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/c1cee548da8a67ab0676146a69214a3f005de750))
+* **MessageBox:** optional condition when closing with OK or Yes ([354992c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/354992cae413c9c35e94a5825da407788b8d076d))
+
 <a name="2.1.0"></a>
 ## [2.1.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.0) (2025-07-23)
 
