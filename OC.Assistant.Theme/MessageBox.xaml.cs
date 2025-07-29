@@ -9,10 +9,13 @@ namespace OC.Assistant.Theme;
 /// </summary>
 public partial class MessageBox
 {
-    private MessageBox()
+    private readonly Func<bool>? _condition;
+    
+    private MessageBox(Func<bool>? condition = null)
     {
         InitializeComponent();
         this.SetDarkAttribute();
+        _condition = condition;
     }
 
     /// <summary>
@@ -34,10 +37,17 @@ public partial class MessageBox
     /// <param name="text">The text within the message box.</param>
     /// <param name="button">The <see cref="MessageBoxButton"/> of the message box.</param>
     /// <param name="image">The shown image on the left side.</param>
+    /// <param name="condition">An optional condition for closing the <see cref="MessageBox"/>
+    /// with <see cref="MessageBoxResult.OK"/> or <see cref="MessageBoxResult.Yes"/>.</param>
     /// <returns></returns>
-    public static async Task<MessageBoxResult> Show(string caption, string text, MessageBoxButton button, MessageBoxImage image)
+    public static async Task<MessageBoxResult> Show(
+        string caption, 
+        string text, 
+        MessageBoxButton button, 
+        MessageBoxImage image, 
+        Func<bool>? condition = null)
     {
-        return await Show(caption, new Label { VerticalAlignment = VerticalAlignment.Center, Content = text}, button, image);
+        return await Show(caption, new Label { VerticalAlignment = VerticalAlignment.Center, Content = text}, button, image, condition);
     }
     
     /// <summary>
@@ -47,10 +57,17 @@ public partial class MessageBox
     /// <param name="content">The content within the message box.</param>
     /// <param name="button">The <see cref="MessageBoxButton"/> of the message box.</param>
     /// <param name="image">The shown image on the left side.</param>
+    /// <param name="condition">An optional condition for closing the <see cref="MessageBox"/>
+    /// with <see cref="MessageBoxResult.OK"/> or <see cref="MessageBoxResult.Yes"/>.</param>
     /// <returns></returns>
-    public static async Task<MessageBoxResult> Show(string caption, UIElement content, MessageBoxButton button, MessageBoxImage image)
+    public static async Task<MessageBoxResult> Show(
+        string caption, 
+        UIElement content, 
+        MessageBoxButton button, 
+        MessageBoxImage image, 
+        Func<bool>? condition = null)
     {
-        var messageBox = new MessageBox
+        var messageBox = new MessageBox(condition)
         {
             TitleLabel = { Text = caption },
             Title = caption,
@@ -153,6 +170,12 @@ public partial class MessageBox
         else if (sender.Equals(ButtonYes)) result = MessageBoxResult.Yes;
         else if (sender.Equals(ButtonNo)) result = MessageBoxResult.No;
         else if (sender.Equals(ButtonCancel)) result = MessageBoxResult.Cancel;
+
+        if (result is MessageBoxResult.OK or MessageBoxResult.Yes && _condition?.Invoke() == false)
+        {
+            this.Shake();
+            return;
+        }
         
         Closed?.Invoke(result);
         Close();
