@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -77,14 +78,14 @@ internal class Message(object sender, string message, MessageType type)
 public partial class LogViewer
 {
     private readonly CancellationTokenSource _cancellationTokenSource = new();
-    private readonly Queue<Message> _messageQueue = [];
-    private readonly object _queueLock = new ();
-    private readonly ObservableRangeExtension<Message> _messageBuffer =[];
+    private readonly ConcurrentQueue<Message> _messageQueue = [];
+    private readonly ObservableList<Message> _messageBuffer =[];
     private readonly ICollectionView _collectionView;
     private bool _infoFilterEnabled = true;
     private bool _warningFilterEnabled = true;
     private bool _errorFilterEnabled = true;
     private ScrollViewer? _scrollViewer;
+    private bool _clearRequested;
 
     /// <summary>
     /// Creates a new instance of the <see cref="LogViewer"/>.
@@ -107,10 +108,7 @@ public partial class LogViewer
     /// <param name="type">The message type.</param>
     public void Add(object sender, string message, MessageType type)
     {
-        lock (_queueLock)
-        {
-            _messageQueue.Enqueue(new Message(sender, message, type));
-        }
+        _messageQueue.Enqueue(new Message(sender, message, type));
     }
 
     private void Console_OnLoaded(object sender, RoutedEventArgs e)
@@ -135,23 +133,30 @@ public partial class LogViewer
         {
             try { await Task.Delay(100, token); }
             catch (TaskCanceledException) { }
-
-            Message[] messages;
             
-            lock (_queueLock)
+            switch (_clearRequested)
             {
-                if (_messageQueue.Count == 0) continue;
-                messages = _messageQueue.ToArray();
-                _messageQueue.Clear();
+                case false when _messageQueue.IsEmpty:
+                    continue;
+                case true:
+                    _clearRequested = false;
+                    _messageBuffer.Clear();
+                    break;
+            }
+
+            while (_messageQueue.TryDequeue(out var item))
+            {
+                _messageBuffer.Add(item);
+            }
+            
+            if (_messageBuffer.Count > 10000)
+            {
+                _messageBuffer.RemoveRange(0, _messageBuffer.Count - 8000);
             }
             
             Dispatcher.Invoke(() =>
             {
-                _messageBuffer.AddRange(messages);
-                if (_messageBuffer.Count > 10000)
-                {
-                    _messageBuffer.RemoveRange(0, _messageBuffer.Count - 8000);
-                }
+                _messageBuffer.Notify();
             });
         }
     }
@@ -160,11 +165,11 @@ public partial class LogViewer
     {
         try
         {
-            if (await MessageBox.Show("LogViewer", "Clear all messages?", 
-                    MessageBoxButton.OKCancel, 
-                    MessageBoxImage.Question) 
-                != MessageBoxResult.OK) return;
-            _messageBuffer.Clear();
+            _clearRequested = await MessageBox.Show(
+                "LogViewer", 
+                "Clear all messages?", 
+                MessageBoxButton.OKCancel, 
+                MessageBoxImage.Question) == MessageBoxResult.OK;
         }
         catch (Exception ex)
         {
