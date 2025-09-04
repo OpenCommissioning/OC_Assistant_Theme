@@ -42,8 +42,6 @@
     <!-- Styles -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Styles/Button.xaml" />
-        <ResourceDictionary Source="Styles/SelectButton.xaml" />
-        <ResourceDictionary Source="Styles/LinkButton.xaml" />
         <ResourceDictionary Source="Styles/CheckBox.xaml" />
         <ResourceDictionary Source="Styles/Icons.xaml" />
         <ResourceDictionary Source="Styles/ComboBox.xaml" />
