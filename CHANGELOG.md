@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.1.2"></a>
+## [2.1.2](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.2) (2025-11-10)
+
+### Bug Fixes
+
+* adjust select button style ([f3343cf](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/f3343cfef24187ccbedaa7d76e6ea07f2ebe42b5))
+* remove file logging from LogViewer (has to be implemented in application) ([1925769](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/19257690c53319db8ecc2160bdeabdf1f4fa3656))
+* **LogViewer:** performance optimization ([25bcc88](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/25bcc88a334b96befb066ddde31e15eaa1501fc1))
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.1) (2025-07-29)
 
