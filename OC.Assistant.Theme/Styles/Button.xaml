@@ -132,4 +132,81 @@
         </Setter>
     </Style>
     
+    <Style x:Key="SelectButton" TargetType="Button" BasedOn="{StaticResource ButtonSecondary}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        x:Name="Background"
+                        Background="{DynamicResource White6Brush}"
+                        BorderBrush="{DynamicResource White5Brush}"
+                        BorderThickness="2"
+                        Padding="6 4"
+                        CornerRadius="{DynamicResource ControlCornerRadius}"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter
+                            x:Name="ContentPresenter"
+                            TextElement.Foreground="{DynamicResource ForegroundBaseBrush}"
+                            TextElement.FontSize="{DynamicResource ThemeFontSize}"
+                            TextElement.FontFamily="{DynamicResource ThemeFontFamily}"
+                            TextElement.FontWeight="Normal"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Focusable="{TemplateBinding Focusable}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Tag" Value="{x:Null}" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource Accent1Brush}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="Tag" Value="Selected">
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{DynamicResource Accent1Brush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.6"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Margin" Value="4 0 4 0" />
+        <Setter Property="FontSize" Value="{DynamicResource ThemeFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource LinkBrush}" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="Button">
+                    <TextBlock x:Name="Text">
+                        <ContentPresenter/>
+                    </TextBlock>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Text" Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.6"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

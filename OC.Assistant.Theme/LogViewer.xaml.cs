@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
+﻿using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -48,20 +46,23 @@ internal class Message(object sender, string message, MessageType type)
     private DateTime DateTime { get; } = DateTime.Now;
 
     /// <summary>
-    /// The type of this message.
+    /// Gets the type of this message.
     /// </summary>
     public MessageType Type => type;
     
     /// <summary>
-    /// The header of the message containing timestamp and sender information.
+    /// Gets the header of the message containing timestamp and sender information.
     /// </summary>
     public string Header => $"{DateTime:yyyy-MM-dd HH:mm:ss.fff} | {sender.ToString()?.Split(':')[0]}";
     
     /// <summary>
-    /// The message text.
+    /// Gets the message text.
     /// </summary>
     public string Text => message;
 
+    /// <summary>
+    /// Gets the icon template for the message type.
+    /// </summary>
     public ControlTemplate? IconTemplate => Type switch
     {
         MessageType.Info => InfoIconTemplate,
@@ -69,11 +70,6 @@ internal class Message(object sender, string message, MessageType type)
         MessageType.Error => ErrorIconTemplate,
         _ => null
     };
-
-    /// <summary>
-    /// The concatenated string for the logFile.
-    /// </summary>
-    public string LogFileText => $"{Type} | {Header} | {Text}\n";
 }
 
 /// <summary>
@@ -82,19 +78,14 @@ internal class Message(object sender, string message, MessageType type)
 public partial class LogViewer
 {
     private readonly CancellationTokenSource _cancellationTokenSource = new();
-    private readonly Queue<Message> _messageQueue = [];
-    private readonly object _queueLock = new ();
-    private readonly ObservableRangeExtension<Message> _messageBuffer =[];
+    private readonly ConcurrentQueue<Message> _messageQueue = [];
+    private readonly ObservableList<Message> _messageBuffer =[];
     private readonly ICollectionView _collectionView;
     private bool _infoFilterEnabled = true;
     private bool _warningFilterEnabled = true;
     private bool _errorFilterEnabled = true;
     private ScrollViewer? _scrollViewer;
-
-    /// <summary>
-    /// Gets or sets the path of the logFile. When the path is <c>null</c>, no logFile is created.
-    /// </summary>
-    public string? LogFilePath { get; set; }
+    private bool _clearRequested;
 
     /// <summary>
     /// Creates a new instance of the <see cref="LogViewer"/>.
@@ -111,23 +102,19 @@ public partial class LogViewer
 
     /// <summary>
     /// Adds a new message to the <see cref="LogViewer"/>.
-    /// Also logs the message to a logFile, of <see cref="LogFilePath"/> is set.
     /// </summary>
     /// <param name="sender">The sender of the message.</param>
     /// <param name="message">The message text.</param>
     /// <param name="type">The message type.</param>
     public void Add(object sender, string message, MessageType type)
     {
-        lock (_queueLock)
-        {
-            _messageQueue.Enqueue(new Message(sender, message, type));
-        }
+        _messageQueue.Enqueue(new Message(sender, message, type));
     }
 
     private void Console_OnLoaded(object sender, RoutedEventArgs e)
     {
         _scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(ItemsControl, 0);
-        Task.Run(LogCycle);
+        Task.Run(UpdateLoop);
     }
 
     private bool UserFilter(object item)
@@ -138,62 +125,51 @@ public partial class LogViewer
                (type is MessageType.Error && _errorFilterEnabled);
     }
     
-    private async Task LogCycle()
+    private async Task UpdateLoop()
     {
         var token = _cancellationTokenSource.Token;
-        var stopwatch = new Stopwatch();
 
         while (!token.IsCancellationRequested)
         {
-            var delta = 100 - (int) stopwatch.Elapsed.TotalMilliseconds;
-            if (delta > 0) Thread.Sleep(delta);
-            stopwatch.Restart();
-
-            Message[] messages;
+            try { await Task.Delay(100, token); }
+            catch (TaskCanceledException) { }
             
-            lock (_queueLock)
+            switch (_clearRequested)
             {
-                if (_messageQueue.Count == 0) continue;
-                messages = _messageQueue.ToArray();
-                _messageQueue.Clear();
+                case false when _messageQueue.IsEmpty:
+                    continue;
+                case true:
+                    _clearRequested = false;
+                    _messageBuffer.Clear();
+                    break;
+            }
+
+            while (_messageQueue.TryDequeue(out var item))
+            {
+                _messageBuffer.Add(item);
+            }
+            
+            if (_messageBuffer.Count > 10000)
+            {
+                _messageBuffer.RemoveRange(0, _messageBuffer.Count - 8000);
             }
             
             Dispatcher.Invoke(() =>
             {
-                _messageBuffer.AddRange(messages);
-                if (_messageBuffer.Count > 10000)
-                {
-                    _messageBuffer.RemoveRange(0, _messageBuffer.Count - 8000);
-                }
+                _messageBuffer.Notify();
             });
-            
-            await WriteToLogFile(messages.Aggregate("", (current, message) => current + message.LogFileText));
         }
-    }
-    
-    private async Task WriteToLogFile(string logFileText)
-    {
-        if (LogFilePath is null) return;
-        if (logFileText == "") return;
-        var streamWriter = new StreamWriter(LogFilePath, true, Encoding.UTF8);
-        await streamWriter.WriteAsync(logFileText);
-        streamWriter.Dispose();
-        
-        if (new FileInfo(LogFilePath).Length < 10240000L) return;
-        File.Copy(LogFilePath, 
-            $"{LogFilePath.Replace(".log", "")}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}");
-        File.WriteAllText(LogFilePath, "");
     }
 
     private async void ClearOnClick(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (await MessageBox.Show("LogViewer", "Clear all messages?", 
-                    MessageBoxButton.OKCancel, 
-                    MessageBoxImage.Question) 
-                != MessageBoxResult.OK) return;
-            _messageBuffer.Clear();
+            _clearRequested = await MessageBox.Show(
+                "LogViewer", 
+                "Clear all messages?", 
+                MessageBoxButton.OKCancel, 
+                MessageBoxImage.Question) == MessageBoxResult.OK;
         }
         catch (Exception ex)
         {
