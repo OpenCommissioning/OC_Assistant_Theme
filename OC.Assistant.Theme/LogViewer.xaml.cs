@@ -203,8 +203,11 @@ public partial class LogViewer
     {
         if (ItemsControl.SelectedItem is Message selectedMessage)
         {
-            SplitterRow.Height = new GridLength(4);
-            DetailRow.Height = new GridLength(ActualHeight / 3);
+            if (SplitterRow.ActualHeight == 0)
+            {
+                SplitterRow.Height = new GridLength(4);
+                DetailRow.Height = new GridLength(ActualHeight / 3);
+            }
             DetailBox.Text = $"""
                               Sender: {selectedMessage.Sender}
                               DateTime: {selectedMessage.DateTime:yyyy-MM-dd HH:mm:ss.fff}
@@ -218,7 +221,7 @@ public partial class LogViewer
         }
     }
 
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    private void CloseDetailOnClick(object sender, RoutedEventArgs e)
     {
         ItemsControl.UnselectAll();
         SplitterRow.Height = new GridLength(0);

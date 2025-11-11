@@ -12,7 +12,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <ScrollViewer CanContentScroll="True">
+                        <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </ControlTemplate>
@@ -65,13 +65,11 @@
                 <VirtualizingStackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Header}"
                                FontSize="12"
-                               TextWrapping="Wrap"
                                Foreground="{DynamicResource White3Brush}"
                                Cursor="Arrow">
                     </TextBlock>
                     <TextBlock Text="{Binding Text}"
                                FontSize="12"
-                               TextWrapping="Wrap"
                                Foreground="{DynamicResource ForegroundBaseBrush}"
                                VerticalAlignment="Center">
                     </TextBlock>
@@ -140,17 +138,27 @@
         <Grid Grid.Row="3">
             <TextBox 
                 x:Name="DetailBox" 
-                Style="{x:Null}" 
+                VerticalContentAlignment="Top"
                 IsReadOnly="True" 
-                BorderThickness="0" 
-                Background="{DynamicResource Dark2Brush}"
-                Foreground="{DynamicResource ForegroundBaseBrush}"/>
-            <Button VerticalAlignment="Top" HorizontalAlignment="Right" Width="20" Height="20" Padding="0" Click="ButtonBase_OnClick">
+                TextWrapping="Wrap"
+                Background="{DynamicResource Dark2Brush}">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Command="Copy"></MenuItem>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
+            <Button 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Width="24" Height="24" 
+                Padding="0" 
+                Click="CloseDetailOnClick">
                 <ContentControl 
                     Template="{DynamicResource IconTemplate}"
                     FontSize="10"
                     Foreground="{DynamicResource ForegroundBaseBrush}"
-                    Content="{DynamicResource IconChromeMinimize}"/>
+                    Content="{DynamicResource IconChromeClose}"/>
             </Button>
         </Grid>
     </Grid>
