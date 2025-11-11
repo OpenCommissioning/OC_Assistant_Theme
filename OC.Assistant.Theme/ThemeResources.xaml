@@ -47,6 +47,7 @@
         <ResourceDictionary Source="Styles/ComboBox.xaml" />
         <ResourceDictionary Source="Styles/Label.xaml" />
         <ResourceDictionary Source="Styles/Menu.xaml" />
+        <ResourceDictionary Source="Styles/ContextMenu.xaml" />
         <ResourceDictionary Source="Styles/MenuItem.xaml" />
         <ResourceDictionary Source="Styles/ScrollBar.xaml" />
         <ResourceDictionary Source="Styles/ScrollViewer.xaml" />
