@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.2.0"></a>
+## [2.2.0](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.2.0) (2025-11-12)
+
+### Features
+
+* add ContextMenuStyle ([3f57e37](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/3f57e3781df01f5b2172e7dcbdc4d2f9984ed2b7))
+* message items can be selected to show detailed information which can also be copied ([927924c](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/927924c65db0b3b34018d4eab48668c6bdc5d1cc))
+
+### Bug Fixes
+
+* **LogViewer:** remove horizontal scrollbar and text wrapping ([213c732](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/213c732b39152b72730bb5606f9ed29f87b0c774))
+* **TextBox:** ContextMenu styling ([8a73e3e](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/commit/8a73e3e25fa42727829654c7b4a988ac83c77444))
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://www.github.com/OpenCommissioning/OC_Assistant_Theme/releases/tag/v2.1.2) (2025-11-10)
 
