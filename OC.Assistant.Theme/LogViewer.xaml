@@ -8,11 +8,11 @@
              d:DesignHeight="140" d:DesignWidth="800" Loaded="Console_OnLoaded"
              Background="{DynamicResource White6Brush}">
     <UserControl.Resources>
-        <Style TargetType="ItemsControl" x:Key="LogViewerStyle">
+        <Style TargetType="ListBox" x:Key="LogViewerStyle">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <ScrollViewer CanContentScroll="True">
+                        <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </ControlTemplate>
@@ -26,6 +26,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}"
+                                x:Name="Bd"
+                                CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource Accent3Brush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <DataTemplate DataType="{x:Type local:Message}">
             <Grid Margin="0 0 0 4">
                 <Grid.ColumnDefinitions>
@@ -41,16 +65,13 @@
                 <VirtualizingStackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Header}"
                                FontSize="12"
-                               TextWrapping="Wrap"
                                Foreground="{DynamicResource White3Brush}"
                                Cursor="Arrow">
                     </TextBlock>
                     <TextBlock Text="{Binding Text}"
                                FontSize="12"
-                               TextWrapping="Wrap"
                                Foreground="{DynamicResource ForegroundBaseBrush}"
-                               VerticalAlignment="Center"
-                               Background="Transparent">
+                               VerticalAlignment="Center">
                     </TextBlock>
                 </VirtualizingStackPanel>
             </Grid>
@@ -60,6 +81,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="4" x:Name="SplitterRow"></RowDefinition>
+            <RowDefinition Height="*" x:Name="DetailRow"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button 
@@ -104,7 +127,39 @@
             </ToggleButton>
         </StackPanel>
         <Grid Grid.Row="1" Background="{DynamicResource Dark2Brush}" >
-            <ItemsControl Style="{StaticResource LogViewerStyle}" x:Name="ItemsControl" />
+            <ListBox Style="{StaticResource LogViewerStyle}" 
+                     x:Name="ItemsControl"
+                     SelectionMode="Single"
+                     SelectionChanged="ItemsControlOnSelectionChanged"
+                     Background="{DynamicResource Dark2Brush}"
+                     BorderThickness="0"/>
+        </Grid>
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent"/>
+        <Grid Grid.Row="3">
+            <TextBox 
+                x:Name="DetailBox" 
+                VerticalContentAlignment="Top"
+                IsReadOnly="True" 
+                TextWrapping="Wrap"
+                Background="{DynamicResource Dark2Brush}">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Command="Copy"></MenuItem>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
+            <Button 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Width="24" Height="24" 
+                Padding="0" 
+                Click="CloseDetailOnClick">
+                <ContentControl 
+                    Template="{DynamicResource IconTemplate}"
+                    FontSize="10"
+                    Foreground="{DynamicResource ForegroundBaseBrush}"
+                    Content="{DynamicResource IconChromeClose}"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

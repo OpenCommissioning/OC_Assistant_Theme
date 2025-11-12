@@ -27,9 +27,20 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="AllowDrop" Value="true" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="ContextMenu" Value="{DynamicResource TextControlContextMenu}" />
         <Setter Property="internals:TextBoxClearButton.IsEnabled" Value="True" />
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource TextControlValidationErrorTemplate}" />
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Cut" Command="Cut" />
+                    <MenuItem Header="Copy" Command="Copy" />
+                    <MenuItem Header="Paste" Command="Paste" />
+                    <Separator />
+                    <MenuItem Header="Select All" Command="SelectAll" />
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -184,13 +195,17 @@
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White2Brush}" />
                             <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
                         </Trigger>
-                        <Trigger Property="IsSelectionActive" Value="true">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelectionActive" Value="True" />
+                                <Condition Property="IsReadOnly" Value="False" />
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="PlaceholderTextContentPresenter" Property="Foreground" Value="{DynamicResource White3Brush}" />
                             <Setter Property="Background" Value="{DynamicResource DarkBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
                             <Setter TargetName="BorderElement" Property="BorderThickness" Value="1" />
                             <Setter Property="Foreground" Value="{DynamicResource ForegroundBaseBrush}" />
-                        </Trigger>
+                        </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsKeyboardFocused" Value="True" />

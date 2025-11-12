@@ -43,7 +43,7 @@ internal class Message(object sender, string message, MessageType type)
     /// <summary>
     /// Gets a <see cref="DateTime"/> value that represents the time of creation of this instance.
     /// </summary>
-    private DateTime DateTime { get; } = DateTime.Now;
+    public DateTime DateTime { get; } = DateTime.Now;
 
     /// <summary>
     /// Gets the type of this message.
@@ -59,6 +59,8 @@ internal class Message(object sender, string message, MessageType type)
     /// Gets the message text.
     /// </summary>
     public string Text => message;
+    
+    public object Sender => sender;
 
     /// <summary>
     /// Gets the icon template for the message type.
@@ -93,6 +95,8 @@ public partial class LogViewer
     public LogViewer()
     {
         InitializeComponent();
+        DetailRow.Height = new GridLength(0);
+        SplitterRow.Height = new GridLength(0);
         
         ItemsControl.ItemsSource = _messageBuffer;
         _messageBuffer.CollectionChanged += (_, _) => _scrollViewer?.ScrollToBottom();
@@ -193,5 +197,34 @@ public partial class LogViewer
     {
         _infoFilterEnabled = ((ToggleButton) sender).IsChecked == true;
         _collectionView.Refresh();
+    }
+
+    private void ItemsControlOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ItemsControl.SelectedItem is Message selectedMessage)
+        {
+            if (SplitterRow.ActualHeight == 0)
+            {
+                SplitterRow.Height = new GridLength(4);
+                DetailRow.Height = new GridLength(ActualHeight / 3);
+            }
+            DetailBox.Text = $"""
+                              Sender: {selectedMessage.Sender}
+                              DateTime: {selectedMessage.DateTime:yyyy-MM-dd HH:mm:ss.fff}
+                              Type: {selectedMessage.Type}
+                              Message: {selectedMessage.Text}
+                              """;
+        }
+        else
+        {
+            DetailBox.Clear();
+        }
+    }
+
+    private void CloseDetailOnClick(object sender, RoutedEventArgs e)
+    {
+        ItemsControl.UnselectAll();
+        SplitterRow.Height = new GridLength(0);
+        DetailRow.Height = new GridLength(0);
     }
 }
